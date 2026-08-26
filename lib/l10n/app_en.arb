@@ -1,0 +1,47 @@
+{
+  "@@locale": "en",
+  "onboarding_languageScreenTitle": "Choose your language",
+  "@onboarding_languageScreenTitle": {
+    "description": "Title text on the language selection screen"
+  },
+  "onboarding_continueButton": "Continue",
+  "@onboarding_continueButton": {
+    "description": "Primary action button to confirm the language selection"
+  },
+  "onboarding_languageName": "{language}",
+  "@onboarding_languageName": {
+    "description": "Semantic label for screen readers to read the language natively and in English",
+    "placeholders": {
+      "language": {
+        "type": "String",
+        "example": "Tamil, தமிழ்"
+      }
+    }
+  },
+  "community_farmersReportedThis": "{count, plural, =0{No farmers near you reported the same issue} =1{1 farmer near you reported the same issue} other{{count} farmers near you reported the same issue}}",
+  "@community_farmersReportedThis": {
+    "description": "Pluralized text indicating how many farmers reported a specific issue",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "capture_shutterHint": "Take a clear photo of the affected crop",
+  "@capture_shutterHint": {
+    "description": "Hint text displayed near the camera shutter button"
+  },
+  "home_gaugeStatusGood": "Good",
+  "@home_gaugeStatusGood": {
+    "description": "Status text indicating healthy crop status in the yield gauge"
+  },
+  "home_gaugeStatusCaution": "Caution",
+  "@home_gaugeStatusCaution": {
+    "description": "Status text indicating cautious crop status in the yield gauge"
+  },
+  "home_gaugeStatusCritical": "Critical",
+  "@home_gaugeStatusCritical": {
+    "description": "Status text indicating critical crop status in the yield gauge"
+  }
+}

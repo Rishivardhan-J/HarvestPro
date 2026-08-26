@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/design_tokens.dart';
+import '../../core/theme/motion_tokens.dart';
 
 /// A chip representing a factor's contribution to the yield prediction.
 class ReasonChip extends StatelessWidget {
@@ -96,16 +97,27 @@ class ReasonChipRow extends StatefulWidget {
 class _ReasonChipRowState extends State<ReasonChipRow> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  bool _hasInitialized = false;
+
   @override
   void initState() {
     super.initState();
-    // 900ms delay to wait for the gauge, plus enough time for all staggers
-    final totalDuration = 900 + (widget.chips.length * 60) + 200;
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: totalDuration),
-    );
-    _controller.forward();
+    _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasInitialized) {
+      final heroMs = MotionTokens.durationHero.inMilliseconds;
+      final totalDuration = heroMs + (widget.chips.length * 60) + MotionTokens.durationStandard.inMilliseconds;
+      _controller.duration = MotionTokens.durationFor(context, Duration(milliseconds: totalDuration));
+      
+      if (_controller.duration != Duration.zero) {
+        _controller.forward();
+      }
+      _hasInitialized = true;
+    }
   }
 
   @override
@@ -132,14 +144,18 @@ class _ReasonChipRowState extends State<ReasonChipRow> with SingleTickerProvider
             );
           }
 
-          // Staggered timing: Wait 900ms (for gauge), then 60ms per index.
-          final delayMs = 900 + (index * 60);
-          final start = delayMs / _controller.duration!.inMilliseconds;
-          final end = (delayMs + 200) / _controller.duration!.inMilliseconds;
+          // Staggered timing
+          final heroMs = MotionTokens.durationHero.inMilliseconds;
+          final standardMs = MotionTokens.durationStandard.inMilliseconds;
+          final delayMs = heroMs + (index * 60);
+          
+          final controllerDuration = _controller.duration!.inMilliseconds;
+          final start = controllerDuration > 0 ? delayMs / controllerDuration : 0.0;
+          final end = controllerDuration > 0 ? (delayMs + standardMs) / controllerDuration : 1.0;
 
           final curve = CurvedAnimation(
             parent: _controller,
-            curve: Interval(start.clamp(0.0, 1.0), end.clamp(0.0, 1.0), curve: Curves.easeOut),
+            curve: Interval(start.clamp(0.0, 1.0), end.clamp(0.0, 1.0), curve: MotionTokens.curveStandard),
           );
 
           return Padding(

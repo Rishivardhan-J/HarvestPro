@@ -4,7 +4,7 @@ import 'typography.dart';
 
 /// AppTheme builds the light and dark ThemeData using exact tokens.
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData getLightTheme([Locale? locale]) {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -15,12 +15,12 @@ class AppTheme {
         primary: HarvestColors.accent,
         onSurface: HarvestColors.inkLight,
       ),
-      textTheme: HarvestTypography.createTextTheme(HarvestColors.inkLight),
+      textTheme: HarvestTypography.createTextTheme(HarvestColors.inkLight, locale),
       dividerColor: HarvestColors.divider(Brightness.light),
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData getDarkTheme([Locale? locale]) {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -31,7 +31,7 @@ class AppTheme {
         primary: HarvestColors.accent,
         onSurface: HarvestColors.inkDark,
       ),
-      textTheme: HarvestTypography.createTextTheme(HarvestColors.inkDark),
+      textTheme: HarvestTypography.createTextTheme(HarvestColors.inkDark, locale),
       dividerColor: HarvestColors.divider(Brightness.dark),
     );
   }

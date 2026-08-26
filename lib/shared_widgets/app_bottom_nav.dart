@@ -6,11 +6,13 @@ class AppBottomNavItem {
   final IconData outlineIcon;
   final IconData filledIcon;
   final String label;
+  final bool hasNotification;
 
   const AppBottomNavItem({
     required this.outlineIcon,
     required this.filledIcon,
     required this.label,
+    this.hasNotification = false,
   });
 }
 
@@ -61,12 +63,31 @@ class AppBottomNav extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        isActive ? item.filledIcon : item.outlineIcon,
-                        size: 24.0,
-                        color: color,
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Icon(
+                            isActive ? item.filledIcon : item.outlineIcon,
+                            size: 24.0,
+                            color: color,
+                          ),
+                          if (item.hasNotification)
+                            Positioned(
+                              right: -2.0,
+                              top: -2.0,
+                              child: Container(
+                                width: 8.0,
+                                height: 8.0,
+                                decoration: const BoxDecoration(
+                                  color: HarvestColors.statusCritical,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                       const SizedBox(height: 2.0),
                       Text(item.label, style: textStyle),

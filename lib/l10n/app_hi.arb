@@ -1,0 +1,19 @@
+{
+  "@@locale": "hi",
+  "@onboarding_languageScreenTitle.draft": "machine-translated",
+  "onboarding_languageScreenTitle": "अपनी भाषा चुनें",
+  "@onboarding_continueButton.draft": "machine-translated",
+  "onboarding_continueButton": "जारी रखें",
+  "@onboarding_languageName.draft": "machine-translated",
+  "onboarding_languageName": "{language}",
+  "@community_farmersReportedThis.draft": "machine-translated",
+  "community_farmersReportedThis": "{count, plural, =0{आपके आस-पास किसी भी किसान ने इस समस्या की रिपोर्ट नहीं की है} =1{आपके आस-पास 1 किसान ने इस समस्या की रिपोर्ट की है} other{आपके आस-पास {count} किसानों ने इस समस्या की रिपोर्ट की है}}",
+  "@capture_shutterHint.draft": "machine-translated",
+  "capture_shutterHint": "प्रभावित फसल की एक स्पष्ट तस्वीर लें",
+  "@home_gaugeStatusGood.draft": "machine-translated",
+  "home_gaugeStatusGood": "अच्छा",
+  "@home_gaugeStatusCaution.draft": "machine-translated",
+  "home_gaugeStatusCaution": "सावधान",
+  "@home_gaugeStatusCritical.draft": "machine-translated",
+  "home_gaugeStatusCritical": "गंभीर"
+}

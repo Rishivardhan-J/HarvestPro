@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/design_tokens.dart';
+import '../../core/theme/motion_tokens.dart';
 import 'status_badge.dart';
 
 class YieldGauge extends StatefulWidget {
@@ -25,15 +26,23 @@ class _YieldGaugeState extends State<YieldGauge> with SingleTickerProviderStateM
   late Animation<double> _animation;
   double _oldValue = 0.0;
 
+  bool _hasInitialized = false;
+
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 900),
-    );
-    _setupAnimation(0.0, widget.value);
-    _controller.forward();
+    _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasInitialized) {
+      _controller.duration = MotionTokens.durationFor(context, MotionTokens.durationHero);
+      _setupAnimation(0.0, widget.value);
+      _controller.forward();
+      _hasInitialized = true;
+    }
   }
 
   @override
@@ -41,7 +50,7 @@ class _YieldGaugeState extends State<YieldGauge> with SingleTickerProviderStateM
     super.didUpdateWidget(oldWidget);
     if (oldWidget.value != widget.value) {
       _oldValue = oldWidget.value;
-      _controller.duration = const Duration(milliseconds: 500);
+      _controller.duration = MotionTokens.durationFor(context, MotionTokens.durationEmphasis);
       _setupAnimation(_oldValue, widget.value);
       _controller.forward(from: 0.0);
     }
@@ -51,7 +60,7 @@ class _YieldGaugeState extends State<YieldGauge> with SingleTickerProviderStateM
     _animation = Tween<double>(begin: begin, end: end).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.easeOutCubic,
+        curve: MotionTokens.curveEmphasis,
       ),
     );
   }

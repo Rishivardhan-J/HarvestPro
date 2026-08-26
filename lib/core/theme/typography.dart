@@ -6,94 +6,112 @@ import 'package:flutter/material.dart';
 /// Families:
 /// - Baloo (Display, H2)
 /// - Mukta (Body, Caption)
+/// Includes regional overrides per Phase 2.
 
 abstract class HarvestTypography {
-  static const String _baloo = 'Baloo';
-  static const String _mukta = 'Mukta';
+  static const String _defaultBaloo = 'Baloo';
+  static const String _defaultMukta = 'Mukta';
 
-  /// Display: 32sp / line-height 40sp (1.25x) / weight 700 / Baloo
-  static const TextStyle display = TextStyle(
-    fontFamily: _baloo,
+  static String _getDisplayFamily(Locale? locale) {
+    switch (locale?.languageCode) {
+      case 'pa': return 'Baloo Paaji 2';
+      case 'ta': return 'Baloo Thambi 2';
+      case 'te': return 'Baloo Tammudu 2';
+      default: return _defaultBaloo;
+    }
+  }
+
+  static String _getBodyFamily(Locale? locale) {
+    switch (locale?.languageCode) {
+      case 'pa': return 'Mukta Mahee';
+      case 'ta': return 'Mukta Malar';
+      case 'te': return 'Noto Sans Telugu';
+      default: return _defaultMukta;
+    }
+  }
+
+  static double _getLineHeightMultiplier(Locale? locale) {
+    if (locale?.languageCode == 'ta' || locale?.languageCode == 'te') {
+      return 1.10; // +10%
+    }
+    return 1.0;
+  }
+
+  static TextStyle display(Locale? locale) => TextStyle(
+    fontFamily: _getDisplayFamily(locale),
     fontSize: 32.0,
-    height: 1.25, // 40 / 32
+    height: 1.25 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w700,
     letterSpacing: 0.0,
   );
 
-  /// Display-small: 28sp / line-height 36sp (1.28x) / weight 700 / Baloo
-  static const TextStyle displaySmall = TextStyle(
-    fontFamily: _baloo,
+  static TextStyle displaySmall(Locale? locale) => TextStyle(
+    fontFamily: _getDisplayFamily(locale),
     fontSize: 28.0,
-    height: 1.2857, // 36 / 28
+    height: 1.2857 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w700,
     letterSpacing: 0.0,
   );
 
-  /// H2: 20sp / line-height 28sp (1.4x) / weight 600 / Baloo
-  static const TextStyle h2 = TextStyle(
-    fontFamily: _baloo,
+  static TextStyle h2(Locale? locale) => TextStyle(
+    fontFamily: _getDisplayFamily(locale),
     fontSize: 20.0,
-    height: 1.4, // 28 / 20
+    height: 1.4 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w600,
     letterSpacing: 0.0,
   );
 
-  /// H2-small: 18sp / line-height 26sp (1.44x) / weight 600 / Baloo
-  static const TextStyle h2Small = TextStyle(
-    fontFamily: _baloo,
+  static TextStyle h2Small(Locale? locale) => TextStyle(
+    fontFamily: _getDisplayFamily(locale),
     fontSize: 18.0,
-    height: 1.4444, // 26 / 18
+    height: 1.4444 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w600,
     letterSpacing: 0.0,
   );
 
-  /// Body: 15sp / line-height 22sp (1.47x) / weight 400 / Mukta
-  static const TextStyle body = TextStyle(
-    fontFamily: _mukta,
+  static TextStyle body(Locale? locale) => TextStyle(
+    fontFamily: _getBodyFamily(locale),
     fontSize: 15.0,
-    height: 1.4667, // 22 / 15
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.1, // Aids low-literacy reading
-  );
-
-  /// Body-small: 14sp / line-height 21sp (1.5x) / weight 400 / Mukta
-  static const TextStyle bodySmall = TextStyle(
-    fontFamily: _mukta,
-    fontSize: 14.0,
-    height: 1.5, // 21 / 14
+    height: 1.4667 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w400,
     letterSpacing: 0.1,
   );
 
-  /// Caption: 12sp / line-height 16sp (1.33x) / weight 500 / Mukta
-  static const TextStyle caption = TextStyle(
-    fontFamily: _mukta,
-    fontSize: 12.0,
-    height: 1.3333, // 16 / 12
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.2, // Small text needs more breathing room
+  static TextStyle bodySmall(Locale? locale) => TextStyle(
+    fontFamily: _getBodyFamily(locale),
+    fontSize: 14.0,
+    height: 1.5 * _getLineHeightMultiplier(locale),
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.1,
   );
 
-  /// Caption-small: 11sp / line-height 14sp (1.27x) / weight 500 / Mukta
-  static const TextStyle captionSmall = TextStyle(
-    fontFamily: _mukta,
+  static TextStyle caption(Locale? locale) => TextStyle(
+    fontFamily: _getBodyFamily(locale),
+    fontSize: 12.0,
+    height: 1.3333 * _getLineHeightMultiplier(locale),
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.2,
+  );
+
+  static TextStyle captionSmall(Locale? locale) => TextStyle(
+    fontFamily: _getBodyFamily(locale),
     fontSize: 11.0,
-    height: 1.2727, // 14 / 11
+    height: 1.2727 * _getLineHeightMultiplier(locale),
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,
   );
 
   /// Generates the standard TextTheme colored correctly for light/dark
-  static TextTheme createTextTheme(Color ink) {
+  static TextTheme createTextTheme(Color ink, [Locale? locale]) {
     return TextTheme(
-      displayLarge: display.copyWith(color: ink),
-      displayMedium: displaySmall.copyWith(color: ink),
-      headlineLarge: h2.copyWith(color: ink),
-      headlineMedium: h2Small.copyWith(color: ink),
-      bodyLarge: body.copyWith(color: ink),
-      bodyMedium: bodySmall.copyWith(color: ink),
-      labelLarge: caption.copyWith(color: ink),
-      labelSmall: captionSmall.copyWith(color: ink),
+      displayLarge: display(locale).copyWith(color: ink),
+      displayMedium: displaySmall(locale).copyWith(color: ink),
+      headlineLarge: h2(locale).copyWith(color: ink),
+      headlineMedium: h2Small(locale).copyWith(color: ink),
+      bodyLarge: body(locale).copyWith(color: ink),
+      bodyMedium: bodySmall(locale).copyWith(color: ink),
+      labelLarge: caption(locale).copyWith(color: ink),
+      labelSmall: captionSmall(locale).copyWith(color: ink),
     );
   }
 }

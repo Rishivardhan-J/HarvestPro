@@ -1,0 +1,11 @@
+{
+  "@@locale": "ta",
+  "onboarding_languageScreenTitle": "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்",
+  "onboarding_continueButton": "தொடரவும்",
+  "onboarding_languageName": "{language}",
+  "community_farmersReportedThis": "{count, plural, =0{உங்களுக்கு அருகில் உள்ள எந்த விவசாயிகளும் இதே பிரச்சினையைப் புகாரளிக்கவில்லை} =1{உங்களுக்கு அருகில் உள்ள 1 விவசாயி இதே பிரச்சினையைப் புகாரளித்துள்ளார்} other{உங்களுக்கு அருகில் உள்ள {count} விவசாயிகள் இதே பிரச்சினையைப் புகாரளித்துள்ளனர்}}",
+  "capture_shutterHint": "பாதிக்கப்பட்ட பயிரின் தெளிவான புகைப்படத்தை எடுக்கவும்",
+  "home_gaugeStatusGood": "நல்லது",
+  "home_gaugeStatusCaution": "எச்சரிக்கை",
+  "home_gaugeStatusCritical": "ஆபத்து"
+}

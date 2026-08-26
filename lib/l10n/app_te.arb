@@ -1,0 +1,19 @@
+{
+  "@@locale": "te",
+  "@onboarding_languageScreenTitle.draft": "machine-translated",
+  "onboarding_languageScreenTitle": "మీ భాషను ఎంచుకోండి",
+  "@onboarding_continueButton.draft": "machine-translated",
+  "onboarding_continueButton": "కొనసాగించు",
+  "@onboarding_languageName.draft": "machine-translated",
+  "onboarding_languageName": "{language}",
+  "@community_farmersReportedThis.draft": "machine-translated",
+  "community_farmersReportedThis": "{count, plural, =0{మీకు సమీపంలో ఏ రైతు ఈ సమస్యను నివేదించలేదు} =1{మీకు సమీపంలో 1 రైతు ఈ సమస్యను నివేదించారు} other{మీకు సమీపంలో {count} రైతులు ఈ సమస్యను నివేదించారు}}",
+  "@capture_shutterHint.draft": "machine-translated",
+  "capture_shutterHint": "ప్రభావిత పంట యొక్క స్పష్టమైన ఫోటో తీయండి",
+  "@home_gaugeStatusGood.draft": "machine-translated",
+  "home_gaugeStatusGood": "బాగుంది",
+  "@home_gaugeStatusCaution.draft": "machine-translated",
+  "home_gaugeStatusCaution": "హెచ్చరిక",
+  "@home_gaugeStatusCritical.draft": "machine-translated",
+  "home_gaugeStatusCritical": "క్లిష్టమైన"
+}

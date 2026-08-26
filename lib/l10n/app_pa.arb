@@ -1,0 +1,19 @@
+{
+  "@@locale": "pa",
+  "@onboarding_languageScreenTitle.draft": "machine-translated",
+  "onboarding_languageScreenTitle": "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ",
+  "@onboarding_continueButton.draft": "machine-translated",
+  "onboarding_continueButton": "ਜਾਰੀ ਰੱਖੋ",
+  "@onboarding_languageName.draft": "machine-translated",
+  "onboarding_languageName": "{language}",
+  "@community_farmersReportedThis.draft": "machine-translated",
+  "community_farmersReportedThis": "{count, plural, =0{ਤੁਹਾਡੇ ਨੇੜੇ ਕਿਸੇ ਵੀ ਕਿਸਾਨ ਨੇ ਇਸ ਸਮੱਸਿਆ ਦੀ ਰਿਪੋਰਟ ਨਹੀਂ ਕੀਤੀ} =1{ਤੁਹਾਡੇ ਨੇੜੇ 1 ਕਿਸਾਨ ਨੇ ਇਸ ਸਮੱਸਿਆ ਦੀ ਰਿਪੋਰਟ ਕੀਤੀ} other{ਤੁਹਾਡੇ ਨੇੜੇ {count} ਕਿਸਾਨਾਂ ਨੇ ਇਸ ਸਮੱਸਿਆ ਦੀ ਰਿਪੋਰਟ ਕੀਤੀ}}",
+  "@capture_shutterHint.draft": "machine-translated",
+  "capture_shutterHint": "ਪ੍ਰਭਾਵਿਤ ਫਸਲ ਦੀ ਸਪਸ਼ਟ ਫੋਟੋ ਲਓ",
+  "@home_gaugeStatusGood.draft": "machine-translated",
+  "home_gaugeStatusGood": "ਵਧੀਆ",
+  "@home_gaugeStatusCaution.draft": "machine-translated",
+  "home_gaugeStatusCaution": "ਸਾਵਧਾਨੀ",
+  "@home_gaugeStatusCritical.draft": "machine-translated",
+  "home_gaugeStatusCritical": "ਗੰਭੀਰ"
+}
