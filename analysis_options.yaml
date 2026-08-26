@@ -1,10 +1,18 @@
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
 include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catching_errors
@@ -36,10 +44,8 @@ linter:
     - file_names
     - hash_and_equals
     - implementation_imports
-    - iterable_contains_unrelated_type
     - library_names
     - library_prefixes
-    - list_remove_unrelated_type
     - no_adjacent_strings_in_list
     - no_duplicate_case_values
     - no_logic_in_create_state
