@@ -351,6 +351,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rainfall'**
   String get factor_rainfall;
+
+  /// No description provided for @capture_instructionPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Point your camera at the leaf'**
+  String get capture_instructionPhoto;
+
+  /// No description provided for @capture_instructionVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the mic to describe what you see'**
+  String get capture_instructionVoice;
+
+  /// No description provided for @capture_instructionText.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe what you\'re seeing'**
+  String get capture_instructionText;
+
+  /// No description provided for @capture_retakeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get capture_retakeButton;
+
+  /// No description provided for @capture_usePhotoButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this photo'**
+  String get capture_usePhotoButton;
+
+  /// No description provided for @capture_useVoiceButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this recording'**
+  String get capture_useVoiceButton;
+
+  /// No description provided for @capture_useTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit note'**
+  String get capture_useTextButton;
+
+  /// No description provided for @capture_cameraRationale.
+  ///
+  /// In en, this message translates to:
+  /// **'HarvestPro needs your camera to check this leaf'**
+  String get capture_cameraRationale;
+
+  /// No description provided for @capture_micRationale.
+  ///
+  /// In en, this message translates to:
+  /// **'HarvestPro needs your microphone to record your note'**
+  String get capture_micRationale;
+
+  /// No description provided for @capture_permissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission Denied'**
+  String get capture_permissionDeniedTitle;
+
+  /// No description provided for @capture_permissionDeniedText.
+  ///
+  /// In en, this message translates to:
+  /// **'You have permanently denied this permission. Please enable it in Settings.'**
+  String get capture_permissionDeniedText;
+
+  /// No description provided for @capture_dailyCheckInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How\'s your field today?'**
+  String get capture_dailyCheckInTitle;
 }
 
 class _AppLocalizationsDelegate

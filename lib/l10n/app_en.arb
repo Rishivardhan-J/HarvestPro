@@ -88,5 +88,17 @@
   },
   "factor_soilMoisture": "Soil Moisture",
   "factor_pestRisk": "Pest Risk",
-  "factor_rainfall": "Rainfall"
+  "factor_rainfall": "Rainfall",
+  "capture_instructionPhoto": "Point your camera at the leaf",
+  "capture_instructionVoice": "Tap the mic to describe what you see",
+  "capture_instructionText": "Describe what you're seeing",
+  "capture_retakeButton": "Retake",
+  "capture_usePhotoButton": "Use this photo",
+  "capture_useVoiceButton": "Use this recording",
+  "capture_useTextButton": "Submit note",
+  "capture_cameraRationale": "HarvestPro needs your camera to check this leaf",
+  "capture_micRationale": "HarvestPro needs your microphone to record your note",
+  "capture_permissionDeniedTitle": "Permission Denied",
+  "capture_permissionDeniedText": "You have permanently denied this permission. Please enable it in Settings.",
+  "capture_dailyCheckInTitle": "How's your field today?"
 }

@@ -9,10 +9,13 @@ import '../../../core/providers/app_state_provider.dart';
 import '../../../core/providers/scroll_signal_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
+import '../../../data/models/daily_checkin.dart';
 import '../../../shared_widgets/action_card.dart';
 import '../../../shared_widgets/reason_chip.dart';
 import '../../../shared_widgets/source_badge.dart';
 import '../../../shared_widgets/yield_gauge.dart';
+import '../../capture/providers/checkin_provider.dart';
+import '../../capture/screens/daily_checkin_sheet.dart';
 import '../providers/home_provider.dart';
 import '../utils/summary_generator.dart';
 
@@ -101,6 +104,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final profile = ref.watch(activeFarmerProfileProvider).value;
     final summary = _currentSummary ?? SummaryGenerator.generate(prediction, AppLocalizations.of(context)!);
 
+    final l10n = AppLocalizations.of(context)!;
+    
+    // Check if daily checkin exists
+    final checkInAsync = ref.watch(todayCheckInProvider(profile?.id ?? ''));
+
     return ListView(
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(horizontal: HarvestSpacing.lg, vertical: HarvestSpacing.md),
@@ -133,6 +141,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
         
+        const SizedBox(height: HarvestSpacing.md),
+        
+        // Daily Check-in Entry Point
+        if (profile != null)
+          checkInAsync.when(
+            data: (checkIn) => _buildCheckInAffordance(context, checkIn, l10n),
+            loading: () => const SizedBox(height: 48),
+            error: (_, _) => const SizedBox(),
+          ),
+          
         const SizedBox(height: HarvestSpacing.xl),
         
         // Gauge wrapped in RepaintBoundary
@@ -232,6 +250,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       }
     }
     return widgets;
+  }
+
+  Widget _buildCheckInAffordance(BuildContext context, DailyCheckIn? checkIn, AppLocalizations l10n) {
+    final isDone = checkIn != null;
+    return GestureDetector(
+      onTap: isDone ? null : () {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(HarvestSpacing.xl)),
+          ),
+          builder: (context) => const DailyCheckinSheet(),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(HarvestSpacing.md),
+        decoration: BoxDecoration(
+          color: isDone ? context.theme.disabledColor.withValues(alpha: 0.1) : HarvestColors.accent.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(HarvestSpacing.md),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              isDone ? Icons.check_circle : Icons.sentiment_satisfied_alt,
+              color: isDone ? context.theme.disabledColor : HarvestColors.accent,
+            ),
+            const SizedBox(width: HarvestSpacing.md),
+            Expanded(
+              child: Text(
+                isDone ? 'Checked in for today' : l10n.capture_dailyCheckInTitle,
+                style: context.textTheme.titleSmall?.copyWith(
+                  color: isDone ? context.theme.disabledColor : context.theme.textTheme.bodyLarge?.color,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildSkeleton(BuildContext context) {

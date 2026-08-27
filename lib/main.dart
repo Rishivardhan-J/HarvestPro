@@ -25,6 +25,10 @@ Future<void> initHive() async {
   await Hive.openBox('profiles', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
   await Hive.openBox('yield_predictions', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
   await Hive.openBox('recommendations', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
+  
+  // Phase 6 Data Contribution
+  await Hive.openBox<String>('capture_artifacts', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
+  await Hive.openBox<String>('daily_checkins', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
 }
 
 Future<void> main() async {

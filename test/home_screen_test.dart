@@ -76,6 +76,31 @@ class TestLocalizations extends AppLocalizations {
   String get onboarding_learnMore => '';
   @override
   String get onboarding_learnMoreText => '';
+  
+  @override
+  String get capture_cameraRationale => '';
+  @override
+  String get capture_dailyCheckInTitle => '';
+  @override
+  String get capture_instructionPhoto => '';
+  @override
+  String get capture_instructionText => '';
+  @override
+  String get capture_instructionVoice => '';
+  @override
+  String get capture_micRationale => '';
+  @override
+  String get capture_permissionDeniedText => '';
+  @override
+  String get capture_permissionDeniedTitle => '';
+  @override
+  String get capture_retakeButton => '';
+  @override
+  String get capture_usePhotoButton => '';
+  @override
+  String get capture_useTextButton => '';
+  @override
+  String get capture_useVoiceButton => '';
 
   @override
   String home_yieldSummarySameSign(String percent, String factor1, String factor2) {

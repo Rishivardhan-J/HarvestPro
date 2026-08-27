@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/capture/providers/camera_provider.dart';
 import '../../features/capture/screens/capture_screen.dart';
 import '../../features/capture/screens/daily_checkin_screen.dart';
 import '../../features/community/screens/community_screen.dart';
@@ -221,6 +222,12 @@ class ScaffoldWithBottomNav extends ConsumerWidget {
         ],
         onItemSelected: (index) {
           HapticFeedback.selectionClick();
+          
+          // Pre-warm camera if Capture tab is tapped (index 1)
+          if (index == 1) {
+            ref.read(cameraControllerProvider.notifier).preWarmCamera();
+          }
+
           if (index == navigationShell.currentIndex) {
             ref.read(scrollToTopSignalProvider(index).notifier).state = DateTime.now();
           } else {

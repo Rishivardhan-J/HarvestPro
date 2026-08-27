@@ -48,12 +48,16 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   shared_preferences: ^2.2.3
   phosphor_flutter: ^2.1.0
+  record: ^7.1.1
+  audioplayers: ^6.8.1
+  encrypt: ^5.0.3
+  path_provider: ^2.1.6
   flutter_localizations:
     sdk: flutter
-  freezed_annotation: any
-  json_annotation: any
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
   animations: any
-  uuid: any
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:

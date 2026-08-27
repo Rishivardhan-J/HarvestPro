@@ -30,7 +30,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "kn": [
@@ -38,7 +50,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "ml": [
@@ -46,7 +70,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "mr": [
@@ -80,7 +116,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "pa": [
@@ -114,7 +162,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "ta": [
@@ -122,7 +182,19 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ],
 
   "te": [
@@ -156,6 +228,18 @@
     "home_yieldSummaryOppositeSign",
     "factor_soilMoisture",
     "factor_pestRisk",
-    "factor_rainfall"
+    "factor_rainfall",
+    "capture_instructionPhoto",
+    "capture_instructionVoice",
+    "capture_instructionText",
+    "capture_retakeButton",
+    "capture_usePhotoButton",
+    "capture_useVoiceButton",
+    "capture_useTextButton",
+    "capture_cameraRationale",
+    "capture_micRationale",
+    "capture_permissionDeniedTitle",
+    "capture_permissionDeniedText",
+    "capture_dailyCheckInTitle"
   ]
 }

@@ -4,6 +4,8 @@ import '../../data/repositories/mock_farmer_profile_repository.dart';
 import '../../data/repositories/mock_yield_repository.dart';
 import '../../data/repositories/yield_repository.dart';
 
+export '../../data/repositories/capture_repository.dart';
+
 final farmerProfileRepositoryProvider = Provider<FarmerProfileRepository>((ref) {
   return MockFarmerProfileRepository(seed: 42);
 });

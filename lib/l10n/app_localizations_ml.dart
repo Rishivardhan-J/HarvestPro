@@ -170,4 +170,43 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get factor_rainfall => 'Rainfall';
+
+  @override
+  String get capture_instructionPhoto => 'Point your camera at the leaf';
+
+  @override
+  String get capture_instructionVoice => 'Tap the mic to describe what you see';
+
+  @override
+  String get capture_instructionText => 'Describe what you\'re seeing';
+
+  @override
+  String get capture_retakeButton => 'Retake';
+
+  @override
+  String get capture_usePhotoButton => 'Use this photo';
+
+  @override
+  String get capture_useVoiceButton => 'Use this recording';
+
+  @override
+  String get capture_useTextButton => 'Submit note';
+
+  @override
+  String get capture_cameraRationale =>
+      'HarvestPro needs your camera to check this leaf';
+
+  @override
+  String get capture_micRationale =>
+      'HarvestPro needs your microphone to record your note';
+
+  @override
+  String get capture_permissionDeniedTitle => 'Permission Denied';
+
+  @override
+  String get capture_permissionDeniedText =>
+      'You have permanently denied this permission. Please enable it in Settings.';
+
+  @override
+  String get capture_dailyCheckInTitle => 'How\'s your field today?';
 }
