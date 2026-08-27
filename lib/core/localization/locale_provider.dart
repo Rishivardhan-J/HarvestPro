@@ -1,15 +1,10 @@
 import 'dart:ui';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:harvestpro/l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-const List<Locale> supportedLocales = [
-  Locale('en'),
-  Locale('ta'),
-  Locale('hi'),
-  Locale('pa'),
-  Locale('te'),
-  Locale('mr'),
-];
+List<Locale> get supportedLocales => AppLocalizations.supportedLocales;
 
 class LocaleNotifier extends StateNotifier<Locale> {
   static const _boxName = 'app_settings';

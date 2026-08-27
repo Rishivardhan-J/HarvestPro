@@ -105,16 +105,26 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
     final l10n = AppLocalizations.of(context)!;
     final voiceAvailabilityAsync = ref.watch(voiceAvailabilityProvider);
 
-    // Hardcoded native names because we need to display all 6 simultaneously 
-    // regardless of what the current AppLocalizations locale is.
-    final languageData = [
-      {'code': 'en', 'native': 'English', 'semantic': l10n.onboarding_languageName('English')},
-      {'code': 'ta', 'native': 'தமிழ்', 'semantic': l10n.onboarding_languageName('Tamil, தமிழ்')},
-      {'code': 'hi', 'native': 'हिन्दी', 'semantic': l10n.onboarding_languageName('Hindi, हिन्दी')},
-      {'code': 'pa', 'native': 'ਪੰਜਾਬੀ', 'semantic': l10n.onboarding_languageName('Punjabi, ਪੰਜਾਬੀ')},
-      {'code': 'te', 'native': 'తెలుగు', 'semantic': l10n.onboarding_languageName('Telugu, తెలుగు')},
-      {'code': 'mr', 'native': 'मराठी', 'semantic': l10n.onboarding_languageName('Marathi, मराठी')},
-    ];
+    final nativeNames = {
+      'en': 'English',
+      'ta': 'தமிழ்',
+      'hi': 'हिन्दी',
+      'pa': 'ਪੰਜਾਬੀ',
+      'te': 'తెలుగు',
+      'mr': 'मराठी',
+      'kn': 'ಕನ್ನಡ',
+      'ml': 'മലയാളം',
+    };
+
+    final languageData = AppLocalizations.supportedLocales.map((locale) {
+      final code = locale.languageCode;
+      final nativeName = nativeNames[code] ?? code;
+      return {
+        'code': code,
+        'native': nativeName,
+        'semantic': l10n.onboarding_languageName(code == 'en' ? nativeName : '$nativeName, ${nativeNames['en']}'),
+      };
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(

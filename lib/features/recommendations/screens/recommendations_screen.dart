@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers/scroll_signal_provider.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
+import '../../../shared_widgets/action_card.dart';
 
 class RecommendationsScreen extends ConsumerStatefulWidget {
   const RecommendationsScreen({super.key});
@@ -29,7 +29,20 @@ class _RecommendationsScreenState extends ConsumerState<RecommendationsScreen> {
         controller: _scrollController,
         padding: const EdgeInsets.all(HarvestSpacing.lg),
         children: [
-          Center(child: Text('Under Construction', style: context.textTheme.headlineMedium?.copyWith(color: context.theme.disabledColor))),
+          Hero(
+            tag: 'action_card_hero',
+            child: Material(
+              type: MaterialType.transparency,
+              child: ActionCard(
+                icon: Icons.water_drop,
+                headline: 'Irrigate fields today',
+                body: 'Soil moisture is dropping fast. Irrigating now will prevent yield loss.',
+                buttonLabel: 'Completed',
+                onButtonPressed: () {},
+              ),
+            ),
+          ),
+          const SizedBox(height: HarvestSpacing.lg),
           ...List.generate(30, (index) => ListTile(title: Text('Recommendation Item $index'))),
         ],
       ),

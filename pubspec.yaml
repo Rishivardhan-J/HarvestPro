@@ -45,6 +45,8 @@ dependencies:
   image: ^4.9.2
   connectivity_plus: ^7.3.1
   permission_handler: ^13.0.1
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.3
   phosphor_flutter: ^2.1.0
   flutter_localizations:
     sdk: flutter
@@ -122,6 +124,20 @@ flutter:
         - asset: assets/fonts/Mukta-Regular.ttf
           weight: 400
     - family: Noto Sans Telugu
+      fonts:
+        - asset: assets/fonts/Mukta-Regular.ttf
+          weight: 400
+    - family: Baloo Tamma 2
+      fonts:
+        - asset: assets/fonts/Baloo2-VariableFont_wght.ttf
+    - family: Baloo Chettan 2
+      fonts:
+        - asset: assets/fonts/Baloo2-VariableFont_wght.ttf
+    - family: Noto Sans Kannada
+      fonts:
+        - asset: assets/fonts/Mukta-Regular.ttf
+          weight: 400
+    - family: Noto Sans Malayalam
       fonts:
         - asset: assets/fonts/Mukta-Regular.ttf
           weight: 400

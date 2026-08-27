@@ -43,5 +43,50 @@
   "home_gaugeStatusCritical": "Critical",
   "@home_gaugeStatusCritical": {
     "description": "Status text indicating critical crop status in the yield gauge"
-  }
+  },
+  "onboarding_enterKisanIdTitle": "Enter Kisan ID",
+  "onboarding_enterKisanIdPrompt": "Please enter your 11-digit Kisan ID",
+  "onboarding_verifyButton": "Verify",
+  "onboarding_noKisanId": "I don't have a Kisan ID yet",
+  "onboarding_identityVerificationTitle": "Verification",
+  "onboarding_verifying": "Verifying...",
+  "onboarding_verifyError": "We couldn't verify that ID. You can try again, or continue without it for now.",
+  "onboarding_retryButton": "Retry",
+  "onboarding_continueWithoutIt": "Continue without it",
+  "onboarding_successTitle": "We found your details",
+  "onboarding_looksRightContinue": "Looks right, continue",
+  "onboarding_manualEntryTitle": "Profile Details",
+  "onboarding_manualEntryPrompt": "Let's set up your profile manually.",
+  "onboarding_nameLabel": "Your Name",
+  "onboarding_villageLabel": "Your Village",
+  "onboarding_cropLabel": "Primary Crop",
+  "onboarding_landSizeLabel": "Rough Land Size",
+  "onboarding_consentTitleKisanId": "Permissions & Privacy",
+  "onboarding_consentPromptKisanId": "Before we pull your farm details...",
+  "onboarding_consentPromptManual": "Before we save your profile...",
+  "onboarding_allowButton": "Allow",
+  "onboarding_notNowButton": "Not now",
+  "onboarding_consentDisclosureKisanId": "We use this to verify your identity. Your details are encrypted safely on your device. You can delete this data at any time from Settings.",
+  "onboarding_consentDisclosureManual": "Your details are encrypted safely on your device. We do not share this data. You can delete it at any time from Settings.",
+  "onboarding_learnMore": "Learn more",
+  "onboarding_learnMoreText": "HarvestPro uses industry-standard AES-256 encryption to protect your data locally. No one else has access to this data unless you explicitly share it. Deleting your profile will permanently remove all associated local records.",
+  "home_yieldSummarySameSign": "Your predicted yield is {percent}% due to {factor1} and {factor2}",
+  "@home_yieldSummarySameSign": {
+    "placeholders": {
+      "percent": {"type": "String"},
+      "factor1": {"type": "String"},
+      "factor2": {"type": "String"}
+    }
+  },
+  "home_yieldSummaryOppositeSign": "Your predicted yield is {percent}% — {factor1} is helping, but {factor2} is pulling it down",
+  "@home_yieldSummaryOppositeSign": {
+    "placeholders": {
+      "percent": {"type": "String"},
+      "factor1": {"type": "String"},
+      "factor2": {"type": "String"}
+    }
+  },
+  "factor_soilMoisture": "Soil Moisture",
+  "factor_pestRisk": "Pest Risk",
+  "factor_rainfall": "Rainfall"
 }

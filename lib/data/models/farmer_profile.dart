@@ -24,3 +24,7 @@ abstract class FarmerProfile with _$FarmerProfile {
 
   factory FarmerProfile.fromJson(Map<String, dynamic> json) => _$FarmerProfileFromJson(json);
 }
+
+extension FarmerProfileX on FarmerProfile {
+  bool get canLinkKisanId => kisanId == null;
+}

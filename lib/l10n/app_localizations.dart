@@ -7,6 +7,8 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
 import 'app_localizations_hi.dart';
+import 'app_localizations_kn.dart';
+import 'app_localizations_ml.dart';
 import 'app_localizations_mr.dart';
 import 'app_localizations_pa.dart';
 import 'app_localizations_ta.dart';
@@ -100,6 +102,8 @@ abstract class AppLocalizations {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('hi'),
+    Locale('kn'),
+    Locale('ml'),
     Locale('mr'),
     Locale('pa'),
     Locale('ta'),
@@ -153,6 +157,200 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Critical'**
   String get home_gaugeStatusCritical;
+
+  /// No description provided for @onboarding_enterKisanIdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Kisan ID'**
+  String get onboarding_enterKisanIdTitle;
+
+  /// No description provided for @onboarding_enterKisanIdPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your 11-digit Kisan ID'**
+  String get onboarding_enterKisanIdPrompt;
+
+  /// No description provided for @onboarding_verifyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get onboarding_verifyButton;
+
+  /// No description provided for @onboarding_noKisanId.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t have a Kisan ID yet'**
+  String get onboarding_noKisanId;
+
+  /// No description provided for @onboarding_identityVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification'**
+  String get onboarding_identityVerificationTitle;
+
+  /// No description provided for @onboarding_verifying.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying...'**
+  String get onboarding_verifying;
+
+  /// No description provided for @onboarding_verifyError.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t verify that ID. You can try again, or continue without it for now.'**
+  String get onboarding_verifyError;
+
+  /// No description provided for @onboarding_retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get onboarding_retryButton;
+
+  /// No description provided for @onboarding_continueWithoutIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue without it'**
+  String get onboarding_continueWithoutIt;
+
+  /// No description provided for @onboarding_successTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We found your details'**
+  String get onboarding_successTitle;
+
+  /// No description provided for @onboarding_looksRightContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks right, continue'**
+  String get onboarding_looksRightContinue;
+
+  /// No description provided for @onboarding_manualEntryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Details'**
+  String get onboarding_manualEntryTitle;
+
+  /// No description provided for @onboarding_manualEntryPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s set up your profile manually.'**
+  String get onboarding_manualEntryPrompt;
+
+  /// No description provided for @onboarding_nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Name'**
+  String get onboarding_nameLabel;
+
+  /// No description provided for @onboarding_villageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Village'**
+  String get onboarding_villageLabel;
+
+  /// No description provided for @onboarding_cropLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Crop'**
+  String get onboarding_cropLabel;
+
+  /// No description provided for @onboarding_landSizeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rough Land Size'**
+  String get onboarding_landSizeLabel;
+
+  /// No description provided for @onboarding_consentTitleKisanId.
+  ///
+  /// In en, this message translates to:
+  /// **'Permissions & Privacy'**
+  String get onboarding_consentTitleKisanId;
+
+  /// No description provided for @onboarding_consentPromptKisanId.
+  ///
+  /// In en, this message translates to:
+  /// **'Before we pull your farm details...'**
+  String get onboarding_consentPromptKisanId;
+
+  /// No description provided for @onboarding_consentPromptManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Before we save your profile...'**
+  String get onboarding_consentPromptManual;
+
+  /// No description provided for @onboarding_allowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get onboarding_allowButton;
+
+  /// No description provided for @onboarding_notNowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get onboarding_notNowButton;
+
+  /// No description provided for @onboarding_consentDisclosureKisanId.
+  ///
+  /// In en, this message translates to:
+  /// **'We use this to verify your identity. Your details are encrypted safely on your device. You can delete this data at any time from Settings.'**
+  String get onboarding_consentDisclosureKisanId;
+
+  /// No description provided for @onboarding_consentDisclosureManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Your details are encrypted safely on your device. We do not share this data. You can delete it at any time from Settings.'**
+  String get onboarding_consentDisclosureManual;
+
+  /// No description provided for @onboarding_learnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more'**
+  String get onboarding_learnMore;
+
+  /// No description provided for @onboarding_learnMoreText.
+  ///
+  /// In en, this message translates to:
+  /// **'HarvestPro uses industry-standard AES-256 encryption to protect your data locally. No one else has access to this data unless you explicitly share it. Deleting your profile will permanently remove all associated local records.'**
+  String get onboarding_learnMoreText;
+
+  /// No description provided for @home_yieldSummarySameSign.
+  ///
+  /// In en, this message translates to:
+  /// **'Your predicted yield is {percent}% due to {factor1} and {factor2}'**
+  String home_yieldSummarySameSign(
+    String percent,
+    String factor1,
+    String factor2,
+  );
+
+  /// No description provided for @home_yieldSummaryOppositeSign.
+  ///
+  /// In en, this message translates to:
+  /// **'Your predicted yield is {percent}% — {factor1} is helping, but {factor2} is pulling it down'**
+  String home_yieldSummaryOppositeSign(
+    String percent,
+    String factor1,
+    String factor2,
+  );
+
+  /// No description provided for @factor_soilMoisture.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Moisture'**
+  String get factor_soilMoisture;
+
+  /// No description provided for @factor_pestRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Pest Risk'**
+  String get factor_pestRisk;
+
+  /// No description provided for @factor_rainfall.
+  ///
+  /// In en, this message translates to:
+  /// **'Rainfall'**
+  String get factor_rainfall;
 }
 
 class _AppLocalizationsDelegate
@@ -168,6 +366,8 @@ class _AppLocalizationsDelegate
   bool isSupported(Locale locale) => <String>[
     'en',
     'hi',
+    'kn',
+    'ml',
     'mr',
     'pa',
     'ta',
@@ -185,6 +385,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEn();
     case 'hi':
       return AppLocalizationsHi();
+    case 'kn':
+      return AppLocalizationsKn();
+    case 'ml':
+      return AppLocalizationsMl();
     case 'mr':
       return AppLocalizationsMr();
     case 'pa':

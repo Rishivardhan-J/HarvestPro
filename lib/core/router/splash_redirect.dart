@@ -15,16 +15,19 @@ String? splashRedirectLogic({
     // 2. Incomplete onboarding
     String target;
     switch (onboardingStep) {
-      case OnboardingStep.language:
+      case OnboardingStep.languageSelection:
         target = '/onboarding/language';
         break;
-      case OnboardingStep.identity:
-        target = '/onboarding/identity';
+      case OnboardingStep.identityChoice:
+        target = '/onboarding/identity-choice';
+        break;
+      case OnboardingStep.identityVerifying:
+        target = '/onboarding/identity-verifying';
         break;
       case OnboardingStep.consent:
         target = '/onboarding/consent';
         break;
-      case OnboardingStep.manualEntry:
+      case OnboardingStep.identityManualEntry:
         target = '/onboarding/manual-entry';
         break;
       default:

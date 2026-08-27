@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:harvestpro/l10n/app_localizations.dart';
 
 import '../../core/localization/locale_provider.dart';
 import '../../core/theme/app_theme.dart';
@@ -110,32 +111,24 @@ class _ShowcaseContent extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'English: Crop health is good.',
-                  style: AppTheme.getLightTheme(const Locale('en')).textTheme.bodyLarge,
-                ),
-                Text(
-                  'Tamil: பயிர் ஆரோக்கியம் நன்றாக உள்ளது.',
-                  style: AppTheme.getLightTheme(const Locale('ta')).textTheme.bodyLarge,
-                ),
-                Text(
-                  'Telugu: పంట ఆరోగ్యం బాగుంది.',
-                  style: AppTheme.getLightTheme(const Locale('te')).textTheme.bodyLarge,
-                ),
-                Text(
-                  'Hindi: फसल का स्वास्थ्य अच्छा है।',
-                  style: AppTheme.getLightTheme(const Locale('hi')).textTheme.bodyLarge,
-                ),
-                Text(
-                  'Punjabi: ਫਸਲ ਦੀ ਸਿਹਤ ਚੰਗੀ ਹੈ।',
-                  style: AppTheme.getLightTheme(const Locale('pa')).textTheme.bodyLarge,
-                ),
-                Text(
-                  'Marathi: पिकाचे आरोग्य चांगले आहे.',
-                  style: AppTheme.getLightTheme(const Locale('mr')).textTheme.bodyLarge,
-                ),
-              ],
+              children: AppLocalizations.supportedLocales.map((locale) {
+                final code = locale.languageCode;
+                final text = {
+                  'en': 'English: Crop health is good.',
+                  'ta': 'Tamil: பயிர் ஆரோக்கியம் நன்றாக உள்ளது.',
+                  'te': 'Telugu: పంట ఆరోగ్యం బాగుంది.',
+                  'hi': 'Hindi: फसल का स्वास्थ्य अच्छा है।',
+                  'pa': 'Punjabi: ਫਸਲ ਦੀ ਸਿਹਤ ਚੰਗੀ ਹੈ।',
+                  'mr': 'Marathi: पिकाचे आरोग्य चांगले आहे.',
+                  'kn': 'Kannada: ಬೆಳೆ ಆರೋಗ್ಯ ಉತ್ತಮವಾಗಿದೆ.',
+                  'ml': 'Malayalam: വിളയുടെ ആരോഗ്യം നല്ലതാണ്.',
+                }[code] ?? '$code: Crop health is good.';
+                
+                return Text(
+                  text,
+                  style: AppTheme.getLightTheme(locale).textTheme.bodyLarge,
+                );
+              }).toList(),
             ),
           ),
           const SizedBox(height: HarvestSpacing.xl),

@@ -4,7 +4,14 @@ import '../../data/models/farmer_profile.dart';
 import '../../data/repositories/farmer_profile_repository.dart';
 import 'repositories_provider.dart';
 
-enum OnboardingStep { language, identity, consent, manualEntry, complete }
+enum OnboardingStep { 
+  languageSelection, 
+  identityChoice, 
+  identityVerifying, 
+  identityManualEntry, 
+  consent, 
+  complete 
+}
 
 class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
   OnboardingStateNotifier() : super(null) {
@@ -20,18 +27,53 @@ class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
         orElse: () => OnboardingStep.complete,
       );
     } else {
-      // Phase 2 legacy mapping: if locale is set but no step recorded
+      // Phase 2 legacy mapping fallback:
       final locale = box.get('locale');
       if (locale != null) {
-        state = OnboardingStep.identity;
+        state = OnboardingStep.identityChoice;
       }
     }
   }
 
-  Future<void> setStep(OnboardingStep step) async {
+  Future<void> _persistAndSet(OnboardingStep step) async {
     final box = Hive.box('app_settings');
     await box.put('onboardingStep', step.toString());
     state = step;
+  }
+
+  Future<void> advanceToIdentityChoice() async {
+    if (state != null && state != OnboardingStep.languageSelection) {
+      throw StateError('Cannot advance to identityChoice from $state');
+    }
+    await _persistAndSet(OnboardingStep.identityChoice);
+  }
+
+  Future<void> advanceToIdentityVerifying() async {
+    if (state != OnboardingStep.identityChoice && state != OnboardingStep.identityVerifying) {
+      throw StateError('Cannot advance to identityVerifying from $state');
+    }
+    await _persistAndSet(OnboardingStep.identityVerifying);
+  }
+
+  Future<void> advanceToManualEntry() async {
+    if (state != OnboardingStep.identityChoice && state != OnboardingStep.consent && state != OnboardingStep.identityVerifying) {
+      throw StateError('Cannot advance to manualEntry from $state');
+    }
+    await _persistAndSet(OnboardingStep.identityManualEntry);
+  }
+
+  Future<void> advanceToConsent() async {
+    if (state != OnboardingStep.identityChoice && state != OnboardingStep.identityVerifying && state != OnboardingStep.identityManualEntry) {
+      throw StateError('Cannot advance to consent from $state');
+    }
+    await _persistAndSet(OnboardingStep.consent);
+  }
+
+  Future<void> advanceToComplete() async {
+    if (state != OnboardingStep.consent && state != OnboardingStep.identityVerifying && state != OnboardingStep.identityManualEntry) {
+      throw StateError('Cannot advance to complete from $state');
+    }
+    await _persistAndSet(OnboardingStep.complete);
   }
 }
 

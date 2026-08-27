@@ -29,7 +29,7 @@ void main() {
       ProviderScope(
         overrides: [
           voiceAvailabilityProvider.overrideWith((ref) async {
-            return {'en': true, 'ta': false, 'hi': true, 'pa': true, 'te': true, 'mr': true};
+            return {'en': true, 'ta': false, 'hi': true, 'pa': true, 'te': true, 'mr': true, 'kn': true, 'ml': true};
           }),
         ],
         child: const MaterialApp(
@@ -68,7 +68,7 @@ void main() {
       ProviderScope(
         overrides: [
           voiceAvailabilityProvider.overrideWith((ref) async {
-            return {'en': true, 'ta': false, 'hi': false, 'pa': false, 'te': false, 'mr': false};
+            return {'en': true, 'ta': false, 'hi': false, 'pa': false, 'te': false, 'mr': false, 'kn': false, 'ml': false};
           }),
         ],
         child: const MaterialApp(
@@ -81,8 +81,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // We should see volume_off icons because 5 languages are unavailable
-    expect(find.byIcon(Icons.volume_off), findsNWidgets(5));
+    // We should see volume_off icons because 7 languages are unavailable
+    expect(find.byIcon(Icons.volume_off), findsNWidgets(7));
     // English is available
     expect(find.byIcon(Icons.volume_up), findsOneWidget);
   });

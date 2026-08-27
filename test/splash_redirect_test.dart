@@ -9,7 +9,8 @@ void main() {
     });
 
     test('Incomplete onboarding (identity) redirects to identity', () {
-      expect(splashRedirectLogic(isSplashRoute: true, currentRoute: '/splash', onboardingStep: OnboardingStep.identity, activeProfilesCount: 0), '/onboarding/identity');
+      final target = splashRedirectLogic(isSplashRoute: true, currentRoute: '/splash', onboardingStep: OnboardingStep.identityChoice, activeProfilesCount: 0);
+      expect(target, '/onboarding/identity-choice');
     });
 
     test('Complete onboarding but 0 profiles redirects to language (broken state repair)', () {

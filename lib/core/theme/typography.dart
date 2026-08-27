@@ -17,6 +17,8 @@ abstract class HarvestTypography {
       case 'pa': return 'Baloo Paaji 2';
       case 'ta': return 'Baloo Thambi 2';
       case 'te': return 'Baloo Tammudu 2';
+      case 'kn': return 'Baloo Tamma 2';
+      case 'ml': return 'Baloo Chettan 2';
       default: return _defaultBaloo;
     }
   }
@@ -26,12 +28,17 @@ abstract class HarvestTypography {
       case 'pa': return 'Mukta Mahee';
       case 'ta': return 'Mukta Malar';
       case 'te': return 'Noto Sans Telugu';
+      case 'kn': return 'Noto Sans Kannada'; // Mukta doesn't support Kannada
+      case 'ml': return 'Noto Sans Malayalam'; // Mukta doesn't support Malayalam
       default: return _defaultMukta;
     }
   }
 
   static double _getLineHeightMultiplier(Locale? locale) {
-    if (locale?.languageCode == 'ta' || locale?.languageCode == 'te') {
+    if (locale?.languageCode == 'ml') {
+      return 1.15; // +15% for complex Malayalam conjuncts
+    }
+    if (locale?.languageCode == 'ta' || locale?.languageCode == 'te' || locale?.languageCode == 'kn') {
       return 1.10; // +10%
     }
     return 1.0;

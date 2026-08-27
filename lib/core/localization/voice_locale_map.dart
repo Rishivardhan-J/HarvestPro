@@ -9,6 +9,8 @@ const Map<String, String> appToTtsLocale = {
   'pa': 'pa-IN',
   'te': 'te-IN',
   'mr': 'mr-IN',
+  'kn': 'kn-IN',
+  'ml': 'ml-IN',
 };
 
 /// Mapping from app language code to STT engine locale. (Reusing the same table)

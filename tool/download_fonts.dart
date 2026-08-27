@@ -7,9 +7,13 @@ Future<void> main() async {
     'Baloo_Paaji_2': 'https://fonts.google.com/download?family=Baloo%20Paaji%202',
     'Baloo_Thambi_2': 'https://fonts.google.com/download?family=Baloo%20Thambi%202',
     'Baloo_Tammudu_2': 'https://fonts.google.com/download?family=Baloo%20Tammudu%202',
+    'Baloo_Tamma_2': 'https://fonts.google.com/download?family=Baloo%20Tamma%202',
+    'Baloo_Chettan_2': 'https://fonts.google.com/download?family=Baloo%20Chettan%202',
     'Mukta_Mahee': 'https://fonts.google.com/download?family=Mukta%20Mahee',
     'Mukta_Malar': 'https://fonts.google.com/download?family=Mukta%20Malar',
     'Noto_Sans_Telugu': 'https://fonts.google.com/download?family=Noto%20Sans%20Telugu',
+    'Noto_Sans_Kannada': 'https://fonts.google.com/download?family=Noto%20Sans%20Kannada',
+    'Noto_Sans_Malayalam': 'https://fonts.google.com/download?family=Noto%20Sans%20Malayalam',
   };
 
   final tempDir = Directory('assets/fonts_temp');

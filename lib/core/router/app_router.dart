@@ -10,7 +10,8 @@ import '../../features/community/screens/community_screen.dart';
 import '../../features/community/screens/post_detail_screen.dart';
 import '../../features/home/screens/home_screen.dart';
 import '../../features/onboarding/screens/consent_screen.dart';
-import '../../features/onboarding/screens/identity_verification_screen.dart';
+import '../../features/onboarding/screens/identity_choice_screen.dart';
+import '../../features/onboarding/screens/identity_verifying_screen.dart';
 import '../../features/onboarding/screens/language_selection_screen.dart';
 import '../../features/onboarding/screens/manual_entry_screen.dart';
 import '../../features/onboarding/screens/splash_screen.dart';
@@ -20,6 +21,7 @@ import '../../features/settings/screens/data_screen.dart';
 import '../../features/settings/screens/profiles_screen.dart';
 import '../../features/settings/screens/settings_screen.dart';
 import '../../shared_widgets/app_bottom_nav.dart';
+import '../../shared_widgets/fade_indexed_stack.dart';
 import '../providers/app_state_provider.dart';
 import '../providers/scroll_signal_provider.dart';
 import '../theme/motion_tokens.dart';
@@ -101,8 +103,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const LanguageSelectionScreen()),
       ),
       GoRoute(
-        path: '/onboarding/identity',
-        pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const IdentityVerificationScreen()),
+        path: '/onboarding/identity-choice',
+        pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const IdentityChoiceScreen()),
+      ),
+      GoRoute(
+        path: '/onboarding/identity-verifying',
+        pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const IdentityVerifyingScreen()),
       ),
       GoRoute(
         path: '/onboarding/consent',
@@ -130,9 +136,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/debug/design-system',
         builder: (context, state) => const DesignShowcaseScreen(),
       ),
-      StatefulShellRoute.indexedStack(
+      StatefulShellRoute(
         builder: (context, state, navigationShell) {
           return ScaffoldWithBottomNav(navigationShell: navigationShell);
+        },
+        navigatorContainerBuilder: (context, navigationShell, children) {
+          return FadeIndexedStack(
+            index: navigationShell.currentIndex,
+            duration: MotionTokens.durationFor(context, MotionTokens.durationMicro),
+            children: children,
+          );
         },
         branches: [
           StatefulShellBranch(
