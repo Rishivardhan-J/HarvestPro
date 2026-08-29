@@ -1,34 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:harvestpro/l10n/app_localizations.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/localization/locale_provider.dart';
 import 'core/router/app_router.dart';
+import 'core/storage/hive_box_manager.dart';
 import 'core/theme/app_theme.dart';
 
 Future<void> initHive() async {
-  await Hive.initFlutter();
-  
-  const secureStorage = FlutterSecureStorage();
-  final containsEncryptionKey = await secureStorage.containsKey(key: 'hive_key');
-  if (!containsEncryptionKey) {
-    final key = Hive.generateSecureKey();
-    await secureStorage.write(key: 'hive_key', value: base64UrlEncode(key));
-  }
-  final key = await secureStorage.read(key: 'hive_key');
-  final encryptionKeyUint8List = base64Url.decode(key!);
-  
-  await Hive.openBox('app_settings', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
-  await Hive.openBox('profiles', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
-  await Hive.openBox('yield_predictions', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
-  await Hive.openBox('recommendations', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
-  
-  // Phase 6 Data Contribution
-  await Hive.openBox<String>('capture_artifacts', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
-  await Hive.openBox<String>('daily_checkins', encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
+  await HiveBoxManager().initBootstrapBoxes();
 }
 
 Future<void> main() async {

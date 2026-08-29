@@ -118,6 +118,47 @@ class TestLocalizations extends AppLocalizations {
   String get factor_pestRisk => 'Pest Risk';
   @override
   String get factor_rainfall => 'Rainfall';
+
+  // Phase 7 Mock Strings
+  @override
+  String get recommendations_title => '';
+  @override
+  String get recommendations_done => '';
+  @override
+  String get recommendations_remindLater => '';
+  @override
+  String get recommendations_emptyTitle => '';
+  @override
+  String recommendations_emptySubtitle(int count) => '';
+  @override
+  String recommendations_valuePerAcre(String value, String acres) => '';
+  @override
+  String recommendations_valueTotal(String value) => '';
+  @override
+  String get community_title => '';
+  @override
+  String get community_emptyFeed => '';
+  @override
+  String community_helpfulBadge(int count) => '';
+  @override
+  String get community_reportAck => '';
+  @override
+  String community_streakTitle(int days) => '';
+  @override
+  String get community_helplineExpert => '';
+  @override
+  String get community_helplinePerson => '';
+  @override
+  String get community_helplineMock => '';
+
+  @override
+  String get recommendations_fertilizer_urea => '';
+  @override
+  String get recommendations_fertilizer_urea_desc => '';
+  @override
+  String get recommendations_pest_stem_borer => '';
+  @override
+  String get recommendations_pest_stem_borer_desc => '';
 }
 
 void main() {

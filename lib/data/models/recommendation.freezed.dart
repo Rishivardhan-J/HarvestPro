@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Recommendation {
 
- String get id; String get farmerProfileId; String get titleKey; String get descriptionKey; double get estimatedValueRupees; EstimatedValueUnit get estimatedValueUnit; RecommendationCategory get category; RecommendationStatus get status; String get iconKey; DateTime get createdAt;
+ String get id; String get farmerProfileId; String get titleKey; String get descriptionKey; double get estimatedValueRupees; EstimatedValueUnit get estimatedValueUnit; RecommendationCategory get category; RecommendationStatus get status; String get iconKey; DateTime get createdAt; DateTime? get scheduledFor;
 /// Create a copy of Recommendation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -219,7 +219,7 @@ return $default(_that.id,_that.farmerProfileId,_that.titleKey,_that.descriptionK
 @JsonSerializable()
 
 class _Recommendation implements Recommendation {
-  const _Recommendation({required this.id, required this.farmerProfileId, required this.titleKey, required this.descriptionKey, required this.estimatedValueRupees, required this.estimatedValueUnit, required this.category, required this.status, required this.iconKey, required this.createdAt});
+  const _Recommendation({required this.id, required this.farmerProfileId, required this.titleKey, required this.descriptionKey, required this.estimatedValueRupees, required this.estimatedValueUnit, required this.category, required this.status, required this.iconKey, required this.createdAt, this.scheduledFor});
   factory _Recommendation.fromJson(Map<String, dynamic> json) => _$RecommendationFromJson(json);
 
 @override final  String id;
@@ -232,6 +232,7 @@ class _Recommendation implements Recommendation {
 @override final  RecommendationStatus status;
 @override final  String iconKey;
 @override final  DateTime createdAt;
+@override final  DateTime? scheduledFor;
 
 /// Create a copy of Recommendation
 /// with the given fields replaced by the non-null parameter values.

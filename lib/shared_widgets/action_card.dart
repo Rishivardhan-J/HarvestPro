@@ -6,8 +6,9 @@ class ActionCard extends StatefulWidget {
   final IconData icon;
   final String headline;
   final String body;
-  final String buttonLabel;
-  final VoidCallback onButtonPressed;
+  final String? buttonLabel;
+  final VoidCallback? onButtonPressed;
+  final Widget? topRightWidget;
   
   /// Extension point for Phase 7 swipe physics. Not wired to logic in Phase 1.
   final ValueChanged<DragStartDetails>? onSwipeStart;
@@ -17,8 +18,9 @@ class ActionCard extends StatefulWidget {
     required this.icon,
     required this.headline,
     required this.body,
-    required this.buttonLabel,
-    required this.onButtonPressed,
+    this.buttonLabel,
+    this.onButtonPressed,
+    this.topRightWidget,
     this.onSwipeStart,
   });
 
@@ -48,20 +50,42 @@ class _ActionCardState extends State<ActionCard> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Headline row
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(widget.icon, size: 24.0, color: context.brightness == Brightness.light ? HarvestColors.inkLight : HarvestColors.inkDark),
-              const SizedBox(width: HarvestSpacing.sm),
-              Expanded(
-                child: Text(
+          if (widget.topRightWidget != null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(widget.icon, size: 24.0, color: context.brightness == Brightness.light ? HarvestColors.inkLight : HarvestColors.inkDark),
+                    widget.topRightWidget!,
+                  ],
+                ),
+                const SizedBox(height: HarvestSpacing.sm),
+                Text(
                   widget.headline,
                   style: context.textTheme.headlineLarge,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          else
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(widget.icon, size: 24.0, color: context.brightness == Brightness.light ? HarvestColors.inkLight : HarvestColors.inkDark),
+                const SizedBox(width: HarvestSpacing.sm),
+                Expanded(
+                  child: Text(
+                    widget.headline,
+                    style: context.textTheme.headlineLarge,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           const SizedBox(height: HarvestSpacing.sm),
           
           // Body text (max 3 lines, ellipsis)
@@ -72,28 +96,30 @@ class _ActionCardState extends State<ActionCard> {
             overflow: TextOverflow.ellipsis,
           ),
           
-          const SizedBox(height: HarvestSpacing.lg),
-          
-          // Primary Button
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: HarvestColors.resolveInteractiveColor(const InteractiveAccent()),
-                foregroundColor: HarvestColors.bgLight, // assuming dark text/icon on accent, or light. Usually inkLight works well on accent, but spec doesn't specify. I'll use bgLight for high contrast.
-                padding: const EdgeInsets.symmetric(vertical: HarvestSpacing.md),
-                shape: const RoundedRectangleBorder(borderRadius: HarvestRadius.md),
-              ),
-              onPressed: widget.onButtonPressed,
-              child: Text(
-                widget.buttonLabel,
-                style: context.textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: HarvestColors.bgLight,
+          if (widget.buttonLabel != null && widget.onButtonPressed != null) ...[
+            const SizedBox(height: HarvestSpacing.lg),
+            
+            // Primary Button
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: HarvestColors.resolveInteractiveColor(const InteractiveAccent()),
+                  foregroundColor: HarvestColors.bgLight, // assuming dark text/icon on accent, or light. Usually inkLight works well on accent, but spec doesn't specify. I'll use bgLight for high contrast.
+                  padding: const EdgeInsets.symmetric(vertical: HarvestSpacing.md),
+                  shape: const RoundedRectangleBorder(borderRadius: HarvestRadius.md),
+                ),
+                onPressed: widget.onButtonPressed,
+                child: Text(
+                  widget.buttonLabel!,
+                  style: context.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: HarvestColors.bgLight,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ],
       ),
     );

@@ -33,5 +33,21 @@
   "onboarding_consentDisclosureKisanId": "[NEEDS_NATIVE_REVIEW] ನಿಮ್ಮ ಗುರುತನ್ನು ಪರಿಶೀಲಿಸಲು ನಾವು ಇದನ್ನು ಬಳಸುತ್ತೇವೆ. ನಿಮ್ಮ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ. ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಂದ ಯಾವುದೇ ಸಮಯದಲ್ಲಿ ಈ ಡೇಟಾವನ್ನು ಅಳಿಸಬಹುದು.",
   "onboarding_consentDisclosureManual": "[NEEDS_NATIVE_REVIEW] ನಿಮ್ಮ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ. ನಾವು ಈ ಡೇಟಾವನ್ನು ಹಂಚಿಕೊಳ್ಳುವುದಿಲ್ಲ. ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಂದ ಯಾವುದೇ ಸಮಯದಲ್ಲಿ ಇದನ್ನು ಅಳಿಸಬಹುದು.",
   "onboarding_learnMore": "[NEEDS_NATIVE_REVIEW] ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
-  "onboarding_learnMoreText": "[NEEDS_NATIVE_REVIEW] ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಸ್ಥಳೀಯವಾಗಿ ರಕ್ಷಿಸಲು ಹಾರ್ವೆಸ್ಟ್‌ಪ್ರೊ ಉದ್ಯಮ-ಗುಣಮಟ್ಟದ AES-256 ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ಬಳಸುತ್ತದೆ. ನೀವು ಸ್ಪಷ್ಟವಾಗಿ ಹಂಚಿಕೊಳ್ಳದ ಹೊರತು ಬೇರೆ ಯಾರಿಗೂ ಈ ಡೇಟಾಗೆ ಪ್ರವೇಶವಿಲ್ಲ. ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಅಳಿಸುವುದರಿಂದ ಅದಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ಸ್ಥಳೀಯ ದಾಖಲೆಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
+  "onboarding_learnMoreText": "[NEEDS_NATIVE_REVIEW] ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಸ್ಥಳೀಯವಾಗಿ ರಕ್ಷಿಸಲು ಹಾರ್ವೆಸ್ಟ್‌ಪ್ರೊ ಉದ್ಯಮ-ಗುಣಮಟ್ಟದ AES-256 ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ಬಳಸುತ್ತದೆ. ನೀವು ಸ್ಪಷ್ಟವಾಗಿ ಹಂಚಿಕೊಳ್ಳದ ಹೊರತು ಬೇರೆ ಯಾರಿಗೂ ಈ ಡೇಟಾಗೆ ಪ್ರವೇಶವಿಲ್ಲ. ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಅಳಿಸುವುದರಿಂದ ಅದಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ಸ್ಥಳೀಯ ದಾಖಲೆಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.",
+  "recommendations_fertilizer_urea": "Apply Urea Fertilizer",
+  "@recommendations_fertilizer_urea": {
+    "description": "Title for the urea fertilizer recommendation"
+  },
+  "recommendations_fertilizer_urea_desc": "Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.",
+  "@recommendations_fertilizer_urea_desc": {
+    "description": "Description for the urea fertilizer recommendation"
+  },
+  "recommendations_pest_stem_borer": "Stem Borer Risk High",
+  "@recommendations_pest_stem_borer": {
+    "description": "Title for the stem borer pest recommendation"
+  },
+  "recommendations_pest_stem_borer_desc": "Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.",
+  "@recommendations_pest_stem_borer_desc": {
+    "description": "Description for the stem borer pest recommendation"
+  }
 }

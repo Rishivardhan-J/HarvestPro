@@ -69,16 +69,27 @@ CustomTransitionPage<void> sharedAxisVerticalPage(BuildContext context, GoRouter
   );
 }
 
-final appRouterProvider = Provider<GoRouter>((ref) {
-  final onboardingStep = ref.watch(onboardingStateProvider);
-  final activeProfileAsync = ref.watch(activeFarmerProfileProvider);
+class RouterNotifier extends ChangeNotifier {
+  RouterNotifier(Ref ref) {
+    ref.listen(onboardingStateProvider, (previous, next) => notifyListeners());
+    ref.listen(activeFarmerProfileProvider, (previous, next) => notifyListeners());
+  }
+}
 
-  // Rebuild router when these states change so redirect re-evaluates
+final appRouterProvider = Provider<GoRouter>((ref) {
+  final notifier = RouterNotifier(ref);
+  ref.onDispose(() => notifier.dispose());
+
+  // Use a listenable to trigger redirect evaluations without recreating the entire GoRouter instance
   return GoRouter(
+    refreshListenable: notifier,
     navigatorKey: rootNavigatorKey,
     initialLocation: '/splash',
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
     redirect: (context, state) {
+      final onboardingStep = ref.read(onboardingStateProvider);
+      final activeProfileAsync = ref.read(activeFarmerProfileProvider);
+
       // Don't redirect while profile is loading to prevent flash
       if (activeProfileAsync.isLoading) {
         return null;

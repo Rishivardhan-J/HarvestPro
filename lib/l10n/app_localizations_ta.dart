@@ -199,4 +199,73 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get capture_dailyCheckInTitle => 'How\'s your field today?';
+
+  @override
+  String get recommendations_title => 'Recommendations';
+
+  @override
+  String get recommendations_done => 'Done';
+
+  @override
+  String get recommendations_remindLater => 'Remind later';
+
+  @override
+  String get recommendations_emptyTitle => 'You\'re all caught up';
+
+  @override
+  String recommendations_emptySubtitle(int count) {
+    return 'Marked $count done today';
+  }
+
+  @override
+  String recommendations_valuePerAcre(String value, String acres) {
+    return 'worth an estimated ₹$value on your $acres-acre plot';
+  }
+
+  @override
+  String recommendations_valueTotal(String value) {
+    return 'worth an estimated ₹$value';
+  }
+
+  @override
+  String get community_title => 'Community';
+
+  @override
+  String get community_emptyFeed => 'Be one of the first to share here';
+
+  @override
+  String community_helpfulBadge(int count) {
+    return 'Helped $count neighbors this week';
+  }
+
+  @override
+  String get community_reportAck => 'Thanks, we\'ll look into it';
+
+  @override
+  String community_streakTitle(int days) {
+    return 'Your plant is sprouting! $days days in a row';
+  }
+
+  @override
+  String get community_helplineExpert => 'Talk to Krishi Expert';
+
+  @override
+  String get community_helplinePerson => 'Talk to a real person';
+
+  @override
+  String get community_helplineMock => 'We\'ll call you back shortly';
+
+  @override
+  String get recommendations_fertilizer_urea => 'Apply Urea Fertilizer';
+
+  @override
+  String get recommendations_fertilizer_urea_desc =>
+      'Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.';
+
+  @override
+  String get recommendations_pest_stem_borer => 'Stem Borer Risk High';
+
+  @override
+  String get recommendations_pest_stem_borer_desc =>
+      'Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.';
 }

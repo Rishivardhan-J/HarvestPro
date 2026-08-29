@@ -20,6 +20,7 @@ abstract class Recommendation with _$Recommendation {
     required RecommendationStatus status,
     required String iconKey,
     required DateTime createdAt,
+    DateTime? scheduledFor,
   }) = _Recommendation;
 
   factory Recommendation.fromJson(Map<String, dynamic> json) => _$RecommendationFromJson(json);

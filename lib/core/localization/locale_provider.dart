@@ -2,22 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harvestpro/l10n/app_localizations.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import '../storage/hive_box_manager.dart';
 
 List<Locale> get supportedLocales => AppLocalizations.supportedLocales;
 
 class LocaleNotifier extends StateNotifier<Locale> {
-  static const _boxName = 'app_settings';
   static const _key = 'locale';
-  Box? _box;
 
   LocaleNotifier() : super(const Locale('en')) {
     _init();
   }
 
   Future<void> _init() async {
-    _box = await Hive.openBox(_boxName);
-    final savedCode = _box!.get(_key) as String?;
+    final savedCode = await HiveBoxManager().getSetting(_key);
     
     if (savedCode != null) {
       final savedLocale = Locale(savedCode);
@@ -38,12 +35,18 @@ class LocaleNotifier extends StateNotifier<Locale> {
   }
 
   Future<void> setLocale(Locale newLocale) async {
+    previewLocale(newLocale);
+    await persistLocale();
+  }
+
+  void previewLocale(Locale newLocale) {
     if (supportedLocales.contains(newLocale)) {
       state = newLocale;
-      if (_box != null) {
-        await _box!.put(_key, newLocale.languageCode);
-      }
     }
+  }
+
+  Future<void> persistLocale() async {
+    await HiveBoxManager().putSetting(_key, state.languageCode);
   }
 }
 

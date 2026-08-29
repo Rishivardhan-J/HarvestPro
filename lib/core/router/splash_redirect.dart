@@ -11,8 +11,8 @@ String? splashRedirectLogic({
   if (onboardingStep == null) {
     // 1. Fresh install
     return currentRoute == '/onboarding/language' ? null : '/onboarding/language';
-  } else if (onboardingStep != OnboardingStep.complete) {
-    // 2. Incomplete onboarding
+  } else {
+    // 2. Incomplete onboarding or Complete
     String target;
     switch (onboardingStep) {
       case OnboardingStep.languageSelection:
@@ -30,22 +30,22 @@ String? splashRedirectLogic({
       case OnboardingStep.identityManualEntry:
         target = '/onboarding/manual-entry';
         break;
-      default:
-        target = '/onboarding/language';
+      case OnboardingStep.complete:
+        // 3 & 4. Onboarding complete
+        if (activeProfilesCount == 0) {
+          // 4. Broken state (zero profiles)
+          // We log this in a real scenario
+          target = '/onboarding/language';
+        } else {
+          // 3. Normal start
+          if (isSplashRoute || currentRoute.startsWith('/onboarding')) {
+            target = '/home'; // Redirect to home if they land on splash or try to go to onboarding
+          } else {
+            return null;
+          }
+        }
+        break;
     }
     return currentRoute == target ? null : target;
-  } else {
-    // 3 & 4. Onboarding complete
-    if (activeProfilesCount == 0) {
-      // 4. Broken state (zero profiles)
-      // We log this in a real scenario
-      return currentRoute == '/onboarding/language' ? null : '/onboarding/language';
-    } else {
-      // 3. Normal start
-      if (isSplashRoute || currentRoute.startsWith('/onboarding')) {
-        return '/home'; // Redirect to home if they land on splash or try to go to onboarding
-      }
-      return null;
-    }
   }
 }

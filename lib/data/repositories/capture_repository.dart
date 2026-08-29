@@ -10,6 +10,7 @@ abstract class CaptureRepository {
   Future<List<CaptureArtifact>> getArtifactsForProfile(String profileId);
   Future<void> saveDailyCheckIn(DailyCheckIn checkIn);
   Future<DailyCheckIn?> getDailyCheckInForDate(String profileId, DateTime date);
+  Future<List<DailyCheckIn>> getAllDailyCheckIns(String profileId);
 }
 
 final captureRepositoryProvider = Provider<CaptureRepository>((ref) {

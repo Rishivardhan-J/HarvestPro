@@ -73,17 +73,29 @@
   "home_yieldSummarySameSign": "Your predicted yield is {percent}% due to {factor1} and {factor2}",
   "@home_yieldSummarySameSign": {
     "placeholders": {
-      "percent": {"type": "String"},
-      "factor1": {"type": "String"},
-      "factor2": {"type": "String"}
+      "percent": {
+        "type": "String"
+      },
+      "factor1": {
+        "type": "String"
+      },
+      "factor2": {
+        "type": "String"
+      }
     }
   },
   "home_yieldSummaryOppositeSign": "Your predicted yield is {percent}% — {factor1} is helping, but {factor2} is pulling it down",
   "@home_yieldSummaryOppositeSign": {
     "placeholders": {
-      "percent": {"type": "String"},
-      "factor1": {"type": "String"},
-      "factor2": {"type": "String"}
+      "percent": {
+        "type": "String"
+      },
+      "factor1": {
+        "type": "String"
+      },
+      "factor2": {
+        "type": "String"
+      }
     }
   },
   "factor_soilMoisture": "Soil Moisture",
@@ -100,5 +112,74 @@
   "capture_micRationale": "HarvestPro needs your microphone to record your note",
   "capture_permissionDeniedTitle": "Permission Denied",
   "capture_permissionDeniedText": "You have permanently denied this permission. Please enable it in Settings.",
-  "capture_dailyCheckInTitle": "How's your field today?"
+  "capture_dailyCheckInTitle": "How's your field today?",
+  "recommendations_title": "Recommendations",
+  "recommendations_done": "Done",
+  "recommendations_remindLater": "Remind later",
+  "recommendations_emptyTitle": "You're all caught up",
+  "recommendations_emptySubtitle": "Marked {count} done today",
+  "@recommendations_emptySubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recommendations_valuePerAcre": "worth an estimated ₹{value} on your {acres}-acre plot",
+  "@recommendations_valuePerAcre": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "acres": {
+        "type": "String"
+      }
+    }
+  },
+  "recommendations_valueTotal": "worth an estimated ₹{value}",
+  "@recommendations_valueTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "community_title": "Community",
+  "community_emptyFeed": "Be one of the first to share here",
+  "community_helpfulBadge": "Helped {count} neighbors this week",
+  "@community_helpfulBadge": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "community_reportAck": "Thanks, we'll look into it",
+  "community_streakTitle": "Your plant is sprouting! {days} days in a row",
+  "@community_streakTitle": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "community_helplineExpert": "Talk to Krishi Expert",
+  "community_helplinePerson": "Talk to a real person",
+  "community_helplineMock": "We'll call you back shortly",
+  "recommendations_fertilizer_urea": "Apply Urea Fertilizer",
+  "@recommendations_fertilizer_urea": {
+    "description": "Title for the urea fertilizer recommendation"
+  },
+  "recommendations_fertilizer_urea_desc": "Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.",
+  "@recommendations_fertilizer_urea_desc": {
+    "description": "Description for the urea fertilizer recommendation"
+  },
+  "recommendations_pest_stem_borer": "Stem Borer Risk High",
+  "@recommendations_pest_stem_borer": {
+    "description": "Title for the stem borer pest recommendation"
+  },
+  "recommendations_pest_stem_borer_desc": "Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.",
+  "@recommendations_pest_stem_borer_desc": {
+    "description": "Description for the stem borer pest recommendation"
+  }
 }

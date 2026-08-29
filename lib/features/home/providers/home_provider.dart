@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../../../core/providers/app_state_provider.dart';
 import '../../../core/providers/repositories_provider.dart';
+import '../../../core/storage/hive_box_manager.dart';
 import '../../../data/models/yield_prediction.dart';
 import '../../../data/repositories/mock_yield_repository.dart';
 
@@ -17,15 +17,17 @@ class VoiceNarrationNotifier extends StateNotifier<bool> {
     _init();
   }
 
-  void _init() {
-    final box = Hive.box('app_settings');
-    final enabled = box.get('voiceNarrationEnabled', defaultValue: true);
-    state = enabled as bool;
+  Future<void> _init() async {
+    final enabled = await HiveBoxManager().getSetting('voiceNarrationEnabled');
+    if (enabled != null) {
+      state = enabled as bool;
+    } else {
+      state = true;
+    }
   }
 
   Future<void> toggle() async {
-    final box = Hive.box('app_settings');
-    await box.put('voiceNarrationEnabled', !state);
+    await HiveBoxManager().putSetting('voiceNarrationEnabled', !state);
     state = !state;
   }
 }

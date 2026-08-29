@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:math';
-import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/storage/hive_box_manager.dart';
 import '../models/farmer_profile.dart';
 import 'farmer_profile_repository.dart';
 
@@ -14,26 +15,34 @@ class MockFarmerProfileRepository implements FarmerProfileRepository {
     final delay = 300 + _random.nextInt(600);
     await Future.delayed(Duration(milliseconds: delay));
     if (_random.nextDouble() < failureRate) {
-      throw Exception('Simulated network failure in MockFarmerProfileRepository');
+      throw StorageException('Simulated network failure in MockFarmerProfileRepository');
     }
   }
 
   @override
   Future<List<FarmerProfile>> getAllProfiles() async {
     await _simulateLatencyAndFailure();
-    final box = Hive.box('profiles');
-    return box.values.map((e) => FarmerProfile.fromJson(Map<String, dynamic>.from(e as Map))).toList();
+    try {
+      final box = await HiveBoxManager().openBox('profiles');
+      return box.values.map((e) => FarmerProfile.fromJson(jsonDecode(e))).toList();
+    } catch (e) {
+      throw StorageException('Failed to get profiles', e);
+    }
   }
 
   @override
   Future<FarmerProfile?> getProfile(String id) async {
     await _simulateLatencyAndFailure();
-    final box = Hive.box('profiles');
-    final data = box.get(id);
-    if (data == null) {
-      return null;
+    try {
+      final box = await HiveBoxManager().openBox('profiles');
+      final data = box.get(id);
+      if (data == null) {
+        return null;
+      }
+      return FarmerProfile.fromJson(jsonDecode(data));
+    } catch (e) {
+      throw StorageException('Failed to get profile $id', e);
     }
-    return FarmerProfile.fromJson(Map<String, dynamic>.from(data as Map));
   }
 
   @override
@@ -60,32 +69,47 @@ class MockFarmerProfileRepository implements FarmerProfileRepository {
   @override
   Future<FarmerProfile> createProfile(FarmerProfile profile) async {
     await _simulateLatencyAndFailure();
-    final box = Hive.box('profiles');
-    await box.put(profile.id, profile.toJson());
-    return profile;
+    try {
+      final box = await HiveBoxManager().openBox('profiles');
+      await box.put(profile.id, jsonEncode(profile.toJson()));
+      return profile;
+    } catch (e) {
+      throw StorageException('Failed to create profile', e);
+    }
   }
 
   @override
   Future<void> deleteProfile(String id) async {
     await _simulateLatencyAndFailure();
-    
-    // Delete the profile
-    final profilesBox = Hive.box('profiles');
-    await profilesBox.delete(id);
-    
-    // Delete tied data (Isolation requirement)
-    final yieldBox = Hive.box('yield_predictions');
-    final keysToDeleteYield = yieldBox.keys.where((k) {
-      final data = yieldBox.get(k) as Map;
-      return data['farmerProfileId'] == id;
-    }).toList();
-    await yieldBox.deleteAll(keysToDeleteYield);
-    
-    final recBox = Hive.box('recommendations');
-    final keysToDeleteRec = recBox.keys.where((k) {
-      final data = recBox.get(k) as Map;
-      return data['farmerProfileId'] == id;
-    }).toList();
-    await recBox.deleteAll(keysToDeleteRec);
+    try {
+      // Delete the profile
+      final profilesBox = await HiveBoxManager().openBox('profiles');
+      await profilesBox.delete(id);
+      
+      // Delete tied data (Isolation requirement)
+      final yieldBox = await HiveBoxManager().openBox('yield_predictions');
+      final keysToDeleteYield = yieldBox.keys.where((k) {
+        final strData = yieldBox.get(k);
+        if (strData == null) {
+          return false;
+        }
+        final data = jsonDecode(strData);
+        return data['farmerProfileId'] == id;
+      }).toList();
+      await yieldBox.deleteAll(keysToDeleteYield);
+      
+      final recBox = await HiveBoxManager().openBox('recommendations');
+      final keysToDeleteRec = recBox.keys.where((k) {
+        final strData = recBox.get(k);
+        if (strData == null) {
+          return false;
+        }
+        final data = jsonDecode(strData);
+        return data['farmerProfileId'] == id;
+      }).toList();
+      await recBox.deleteAll(keysToDeleteRec);
+    } catch (e) {
+      throw StorageException('Failed to delete profile $id and its tied data', e);
+    }
   }
 }

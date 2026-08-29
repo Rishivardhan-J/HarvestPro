@@ -33,5 +33,21 @@
   "onboarding_consentDisclosureKisanId": "உங்கள் அடையாளத்தை சரிபார்க்க இதைப் பயன்படுத்துகிறோம். உங்கள் விவரங்கள் உங்கள் சாதனத்தில் பாதுகாப்பாக குறியாக்கம் செய்யப்பட்டுள்ளன. நீங்கள் எந்த நேரத்திலும் அமைப்புகளிலிருந்து இந்தத் தரவை நீக்கலாம்.",
   "onboarding_consentDisclosureManual": "உங்கள் விவரங்கள் உங்கள் சாதனத்தில் பாதுகாப்பாக குறியாக்கம் செய்யப்பட்டுள்ளன. நாங்கள் இந்தத் தரவைப் பகிர மாட்டோம். நீங்கள் எந்த நேரத்திலும் அமைப்புகளிலிருந்து இதை நீக்கலாம்.",
   "onboarding_learnMore": "மேலும் அறிக",
-  "onboarding_learnMoreText": "உங்கள் தரவை உள்ளூரில் பாதுகாக்க HarvestPro தொழில்-தரநிலை AES-256 குறியாக்கத்தைப் பயன்படுத்துகிறது. நீங்கள் வெளிப்படையாகப் பகிராத வரை வேறு எவருக்கும் இந்தத் தரவுக்கான அணுகல் இல்லை. உங்கள் சுயவிவரத்தை நீக்குவது தொடர்புடைய அனைத்து உள்ளூர் பதிவுகளையும் நிரந்தரமாக அகற்றும்."
+  "onboarding_learnMoreText": "உங்கள் தரவை உள்ளூரில் பாதுகாக்க HarvestPro தொழில்-தரநிலை AES-256 குறியாக்கத்தைப் பயன்படுத்துகிறது. நீங்கள் வெளிப்படையாகப் பகிராத வரை வேறு எவருக்கும் இந்தத் தரவுக்கான அணுகல் இல்லை. உங்கள் சுயவிவரத்தை நீக்குவது தொடர்புடைய அனைத்து உள்ளூர் பதிவுகளையும் நிரந்தரமாக அகற்றும்.",
+  "recommendations_fertilizer_urea": "Apply Urea Fertilizer",
+  "@recommendations_fertilizer_urea": {
+    "description": "Title for the urea fertilizer recommendation"
+  },
+  "recommendations_fertilizer_urea_desc": "Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.",
+  "@recommendations_fertilizer_urea_desc": {
+    "description": "Description for the urea fertilizer recommendation"
+  },
+  "recommendations_pest_stem_borer": "Stem Borer Risk High",
+  "@recommendations_pest_stem_borer": {
+    "description": "Title for the stem borer pest recommendation"
+  },
+  "recommendations_pest_stem_borer_desc": "Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.",
+  "@recommendations_pest_stem_borer_desc": {
+    "description": "Description for the stem borer pest recommendation"
+  }
 }

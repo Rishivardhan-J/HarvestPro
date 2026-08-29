@@ -423,6 +423,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'How\'s your field today?'**
   String get capture_dailyCheckInTitle;
+
+  /// No description provided for @recommendations_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations'**
+  String get recommendations_title;
+
+  /// No description provided for @recommendations_done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get recommendations_done;
+
+  /// No description provided for @recommendations_remindLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind later'**
+  String get recommendations_remindLater;
+
+  /// No description provided for @recommendations_emptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up'**
+  String get recommendations_emptyTitle;
+
+  /// No description provided for @recommendations_emptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked {count} done today'**
+  String recommendations_emptySubtitle(int count);
+
+  /// No description provided for @recommendations_valuePerAcre.
+  ///
+  /// In en, this message translates to:
+  /// **'worth an estimated ₹{value} on your {acres}-acre plot'**
+  String recommendations_valuePerAcre(String value, String acres);
+
+  /// No description provided for @recommendations_valueTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'worth an estimated ₹{value}'**
+  String recommendations_valueTotal(String value);
+
+  /// No description provided for @community_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get community_title;
+
+  /// No description provided for @community_emptyFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Be one of the first to share here'**
+  String get community_emptyFeed;
+
+  /// No description provided for @community_helpfulBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Helped {count} neighbors this week'**
+  String community_helpfulBadge(int count);
+
+  /// No description provided for @community_reportAck.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks, we\'ll look into it'**
+  String get community_reportAck;
+
+  /// No description provided for @community_streakTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your plant is sprouting! {days} days in a row'**
+  String community_streakTitle(int days);
+
+  /// No description provided for @community_helplineExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk to Krishi Expert'**
+  String get community_helplineExpert;
+
+  /// No description provided for @community_helplinePerson.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk to a real person'**
+  String get community_helplinePerson;
+
+  /// No description provided for @community_helplineMock.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll call you back shortly'**
+  String get community_helplineMock;
+
+  /// Title for the urea fertilizer recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Apply Urea Fertilizer'**
+  String get recommendations_fertilizer_urea;
+
+  /// Description for the urea fertilizer recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.'**
+  String get recommendations_fertilizer_urea_desc;
+
+  /// Title for the stem borer pest recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Stem Borer Risk High'**
+  String get recommendations_pest_stem_borer;
+
+  /// Description for the stem borer pest recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.'**
+  String get recommendations_pest_stem_borer_desc;
 }
 
 class _AppLocalizationsDelegate

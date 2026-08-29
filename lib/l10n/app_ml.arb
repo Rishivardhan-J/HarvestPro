@@ -33,5 +33,21 @@
   "onboarding_consentDisclosureKisanId": "[NEEDS_NATIVE_REVIEW] നിങ്ങളുടെ ഐഡന്റിറ്റി പരിശോധിക്കാൻ ഞങ്ങൾ ഇത് ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ വിവരങ്ങൾ നിങ്ങളുടെ ഉപകരണത്തിൽ സുരക്ഷിതമായി എൻക്രിപ്റ്റ് ചെയ്തിരിക്കുന്നു. ക്രമീകരണങ്ങളിൽ നിന്ന് നിങ്ങൾക്ക് എപ്പോൾ വേണമെങ്കിലും ഈ ഡാറ്റ ഇല്ലാതാക്കാൻ കഴിയും.",
   "onboarding_consentDisclosureManual": "[NEEDS_NATIVE_REVIEW] നിങ്ങളുടെ വിവരങ്ങൾ നിങ്ങളുടെ ഉപകരണത്തിൽ സുരക്ഷിതമായി എൻക്രിപ്റ്റ് ചെയ്തിരിക്കുന്നു. ഞങ്ങൾ ഈ ഡാറ്റ പങ്കിടില്ല. ക്രമീകരണങ്ങളിൽ നിന്ന് നിങ്ങൾക്ക് എപ്പോൾ വേണമെങ്കിലും ഇത് ഇല്ലാതാക്കാൻ കഴിയും.",
   "onboarding_learnMore": "[NEEDS_NATIVE_REVIEW] കൂടുതൽ അറിയുക",
-  "onboarding_learnMoreText": "[NEEDS_NATIVE_REVIEW] നിങ്ങളുടെ ഡാറ്റ പ്രാദേശികമായി പരിരക്ഷിക്കുന്നതിന് ഹാർവെസ്റ്റ്പ്രോ വ്യവസായ നിലവാരമുള്ള AES-256 എൻക്രിപ്ഷൻ ഉപയോഗിക്കുന്നു. നിങ്ങൾ വ്യക്തമായി പങ്കിടുന്നില്ലെങ്കിൽ മറ്റാർക്കും ഈ ഡാറ്റയിലേക്ക് ആക്സസ് ഇല്ല. നിങ്ങളുടെ പ്രൊഫൈൽ ഇല്ലാതാക്കുന്നത് ബന്ധപ്പെട്ട എല്ലാ പ്രാദേശിക രേഖകളും ശാശ്വതമായി നീക്കംചെയ്യും."
+  "onboarding_learnMoreText": "[NEEDS_NATIVE_REVIEW] നിങ്ങളുടെ ഡാറ്റ പ്രാദേശികമായി പരിരക്ഷിക്കുന്നതിന് ഹാർവെസ്റ്റ്പ്രോ വ്യവസായ നിലവാരമുള്ള AES-256 എൻക്രിപ്ഷൻ ഉപയോഗിക്കുന്നു. നിങ്ങൾ വ്യക്തമായി പങ്കിടുന്നില്ലെങ്കിൽ മറ്റാർക്കും ഈ ഡാറ്റയിലേക്ക് ആക്സസ് ഇല്ല. നിങ്ങളുടെ പ്രൊഫൈൽ ഇല്ലാതാക്കുന്നത് ബന്ധപ്പെട്ട എല്ലാ പ്രാദേശിക രേഖകളും ശാശ്വതമായി നീക്കംചെയ്യും.",
+  "recommendations_fertilizer_urea": "Apply Urea Fertilizer",
+  "@recommendations_fertilizer_urea": {
+    "description": "Title for the urea fertilizer recommendation"
+  },
+  "recommendations_fertilizer_urea_desc": "Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.",
+  "@recommendations_fertilizer_urea_desc": {
+    "description": "Description for the urea fertilizer recommendation"
+  },
+  "recommendations_pest_stem_borer": "Stem Borer Risk High",
+  "@recommendations_pest_stem_borer": {
+    "description": "Title for the stem borer pest recommendation"
+  },
+  "recommendations_pest_stem_borer_desc": "Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.",
+  "@recommendations_pest_stem_borer_desc": {
+    "description": "Description for the stem borer pest recommendation"
+  }
 }

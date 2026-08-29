@@ -15,5 +15,21 @@
   "@home_gaugeStatusCaution.draft": "machine-translated",
   "home_gaugeStatusCaution": "सावधान",
   "@home_gaugeStatusCritical.draft": "machine-translated",
-  "home_gaugeStatusCritical": "गंभीर"
+  "home_gaugeStatusCritical": "गंभीर",
+  "recommendations_fertilizer_urea": "Apply Urea Fertilizer",
+  "@recommendations_fertilizer_urea": {
+    "description": "Title for the urea fertilizer recommendation"
+  },
+  "recommendations_fertilizer_urea_desc": "Your soil nitrogen levels are low. Applying urea now will boost vegetative growth.",
+  "@recommendations_fertilizer_urea_desc": {
+    "description": "Description for the urea fertilizer recommendation"
+  },
+  "recommendations_pest_stem_borer": "Stem Borer Risk High",
+  "@recommendations_pest_stem_borer": {
+    "description": "Title for the stem borer pest recommendation"
+  },
+  "recommendations_pest_stem_borer_desc": "Weather conditions are highly favorable for stem borers. Preventative spray recommended within 48 hours.",
+  "@recommendations_pest_stem_borer_desc": {
+    "description": "Description for the stem borer pest recommendation"
+  }
 }

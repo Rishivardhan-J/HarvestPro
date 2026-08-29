@@ -28,5 +28,26 @@ void main() {
     test('No redirect needed if already on the correct route', () {
       expect(splashRedirectLogic(isSplashRoute: false, currentRoute: '/home', onboardingStep: OnboardingStep.complete, activeProfilesCount: 1), null);
     });
+
+    test('Exhaustive test over all OnboardingStep values', () {
+      final expectedRoutes = {
+        OnboardingStep.languageSelection: '/onboarding/language',
+        OnboardingStep.identityChoice: '/onboarding/identity-choice',
+        OnboardingStep.identityVerifying: '/onboarding/identity-verifying',
+        OnboardingStep.consent: '/onboarding/consent',
+        OnboardingStep.identityManualEntry: '/onboarding/manual-entry',
+        OnboardingStep.complete: '/home', // With active profiles
+      };
+
+      for (final step in OnboardingStep.values) {
+        final target = splashRedirectLogic(
+          isSplashRoute: true,
+          currentRoute: '/splash',
+          onboardingStep: step,
+          activeProfilesCount: 1, // Assumes a healthy profile state
+        );
+        expect(target, expectedRoutes[step], reason: 'Failed for $step');
+      }
+    });
   });
 }

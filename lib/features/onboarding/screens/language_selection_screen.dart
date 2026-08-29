@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:harvestpro/l10n/app_localizations.dart';
 
 import '../../../core/localization/locale_provider.dart';
 import '../../../core/localization/voice_locale_map.dart';
+import '../../../core/providers/app_state_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 
@@ -89,14 +91,35 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
     setState(() {
       _selectedLanguageCode = code;
     });
-    // Don't persist yet, just preview
+    // Live preview the locale visually without persisting
+    ref.read(localeProvider.notifier).previewLocale(Locale(code));
     _playLanguageName(code, nativeName, isAvailable);
   }
 
-  void _onContinuePressed() {
+  Future<void> _onContinuePressed() async {
     if (_selectedLanguageCode != null) {
-      ref.read(localeProvider.notifier).setLocale(Locale(_selectedLanguageCode!));
-      // Navigate to identity verification
+      try {
+        // 1. Persist to Hive (await it to avoid redirect race)
+        await ref.read(localeProvider.notifier).persistLocale();
+        
+        // 2. Advance state machine
+        await ref.read(onboardingStateProvider.notifier).advanceToIdentityChoice();
+        
+        // 3. Navigate securely
+        if (!mounted) {
+          return;
+        }
+        context.go('/onboarding/identity-choice');
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('An unexpected error occurred: $e'),
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+          );
+        }
+      }
     }
   }
 

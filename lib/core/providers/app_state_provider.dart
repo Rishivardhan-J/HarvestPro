@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../../data/models/farmer_profile.dart';
 import '../../data/repositories/farmer_profile_repository.dart';
+import '../storage/hive_box_manager.dart';
 import 'repositories_provider.dart';
 
 enum OnboardingStep { 
@@ -18,9 +18,8 @@ class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
     _loadState();
   }
 
-  void _loadState() {
-    final box = Hive.box('app_settings');
-    final stepStr = box.get('onboardingStep');
+  Future<void> _loadState() async {
+    final stepStr = await HiveBoxManager().getSetting('onboardingStep');
     if (stepStr != null) {
       state = OnboardingStep.values.firstWhere(
         (e) => e.toString() == stepStr,
@@ -28,7 +27,7 @@ class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
       );
     } else {
       // Phase 2 legacy mapping fallback:
-      final locale = box.get('locale');
+      final locale = await HiveBoxManager().getSetting('locale');
       if (locale != null) {
         state = OnboardingStep.identityChoice;
       }
@@ -36,13 +35,12 @@ class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
   }
 
   Future<void> _persistAndSet(OnboardingStep step) async {
-    final box = Hive.box('app_settings');
-    await box.put('onboardingStep', step.toString());
+    await HiveBoxManager().putSetting('onboardingStep', step.toString());
     state = step;
   }
 
   Future<void> advanceToIdentityChoice() async {
-    if (state != null && state != OnboardingStep.languageSelection) {
+    if (state != null && state != OnboardingStep.languageSelection && state != OnboardingStep.complete) {
       throw StateError('Cannot advance to identityChoice from $state');
     }
     await _persistAndSet(OnboardingStep.identityChoice);
@@ -96,8 +94,7 @@ class ActiveFarmerProfileNotifier extends StateNotifier<AsyncValue<FarmerProfile
         return;
       }
       
-      final box = Hive.box('app_settings');
-      final activeId = box.get('activeProfileId');
+      final activeId = await HiveBoxManager().getSetting('activeProfileId');
       
       if (activeId != null) {
         try {
@@ -105,11 +102,11 @@ class ActiveFarmerProfileNotifier extends StateNotifier<AsyncValue<FarmerProfile
           state = AsyncValue.data(profile);
         } catch (_) {
           state = AsyncValue.data(profiles.first);
-          await box.put('activeProfileId', profiles.first.id);
+          await HiveBoxManager().putSetting('activeProfileId', profiles.first.id);
         }
       } else {
         state = AsyncValue.data(profiles.first);
-        await box.put('activeProfileId', profiles.first.id);
+        await HiveBoxManager().putSetting('activeProfileId', profiles.first.id);
       }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -117,8 +114,7 @@ class ActiveFarmerProfileNotifier extends StateNotifier<AsyncValue<FarmerProfile
   }
 
   Future<void> setActiveProfile(String id) async {
-    final box = Hive.box('app_settings');
-    await box.put('activeProfileId', id);
+    await HiveBoxManager().putSetting('activeProfileId', id);
     await _init();
   }
 }

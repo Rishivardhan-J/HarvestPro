@@ -42,7 +42,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "kn": [
@@ -62,7 +77,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "ml": [
@@ -82,7 +112,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "mr": [
@@ -128,7 +173,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "pa": [
@@ -174,7 +234,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "ta": [
@@ -194,7 +269,22 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ],
 
   "te": [
@@ -240,6 +330,21 @@
     "capture_micRationale",
     "capture_permissionDeniedTitle",
     "capture_permissionDeniedText",
-    "capture_dailyCheckInTitle"
+    "capture_dailyCheckInTitle",
+    "recommendations_title",
+    "recommendations_done",
+    "recommendations_remindLater",
+    "recommendations_emptyTitle",
+    "recommendations_emptySubtitle",
+    "recommendations_valuePerAcre",
+    "recommendations_valueTotal",
+    "community_title",
+    "community_emptyFeed",
+    "community_helpfulBadge",
+    "community_reportAck",
+    "community_streakTitle",
+    "community_helplineExpert",
+    "community_helplinePerson",
+    "community_helplineMock"
   ]
 }
