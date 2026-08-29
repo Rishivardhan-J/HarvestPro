@@ -6,6 +6,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 import '../../../data/models/post.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared_widgets/error_state.dart';
+import '../../../shared_widgets/offline_banner.dart';
 import '../widgets/streak_visual.dart';
 
 final communityFeedProvider = FutureProvider.autoDispose<List<Post>>((ref) async {
@@ -59,69 +61,79 @@ class CommunityScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.community_title),
       ),
-      body: feedAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err')),
-        data: (posts) {
-          return CustomScrollView(
-            slivers: [
-              const SliverToBoxAdapter(
-                child: StreakVisual(),
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(
+            child: feedAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => ErrorState(
+                message: 'Failed to load community feed.',
+                onRetry: () => ref.invalidate(communityFeedProvider),
               ),
-              if (posts.isEmpty)
-                SliverFillRemaining(
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.people_outline, size: 80, color: HarvestColors.inkLight),
-                        const SizedBox(height: HarvestSpacing.lg),
-                        Text(l10n.community_emptyFeed, style: context.textTheme.headlineMedium),
-                      ],
+              data: (posts) {
+                return CustomScrollView(
+                  slivers: [
+                    const SliverToBoxAdapter(
+                      child: StreakVisual(),
                     ),
-                  ),
-                )
-              else
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final post = posts[index];
-                      return _buildPostCard(context, ref, post, l10n);
-                    },
-                    childCount: posts.length,
-                  ),
-                ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(HarvestSpacing.md),
-                  child: Column(
-                    children: [
-                      const Divider(),
-                      const SizedBox(height: HarvestSpacing.sm),
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.support_agent),
-                        label: Text(l10n.community_helplineExpert),
-                        onPressed: () => _handleHelplineCall(context, l10n),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(48),
+                    if (posts.isEmpty)
+                      SliverFillRemaining(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.people_outline, size: 80, color: HarvestColors.inkLight),
+                              const SizedBox(height: HarvestSpacing.lg),
+                              Text(l10n.community_emptyFeed, style: context.textTheme.headlineMedium),
+                            ],
+                          ),
+                        ),
+                      )
+                    else
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final post = posts[index];
+                            return _buildPostCard(context, ref, post, l10n);
+                          },
+                          childCount: posts.length,
                         ),
                       ),
-                      const SizedBox(height: HarvestSpacing.sm),
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.phone),
-                        label: Text(l10n.community_helplinePerson),
-                        onPressed: () => _handleHelplineCall(context, l10n),
-                        style: OutlinedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(48),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(HarvestSpacing.md),
+                        child: Column(
+                          children: [
+                            const Divider(),
+                            const SizedBox(height: HarvestSpacing.sm),
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.support_agent),
+                              label: Text(l10n.community_helplineExpert),
+                              onPressed: () => _handleHelplineCall(context, l10n),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(48),
+                              ),
+                            ),
+                            const SizedBox(height: HarvestSpacing.sm),
+                            OutlinedButton.icon(
+                              icon: const Icon(Icons.phone),
+                              label: Text(l10n.community_helplinePerson),
+                              onPressed: () => _handleHelplineCall(context, l10n),
+                              style: OutlinedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(48),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

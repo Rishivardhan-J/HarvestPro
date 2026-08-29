@@ -7,6 +7,8 @@ import '../../../core/theme/design_tokens.dart';
 import '../../../data/models/recommendation.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared_widgets/action_card.dart';
+import '../../../shared_widgets/error_state.dart';
+import '../../../shared_widgets/offline_banner.dart';
 import '../widgets/celebration_overlay.dart';
 import '../widgets/swipeable_card.dart';
 
@@ -72,79 +74,89 @@ class _RecommendationsScreenState extends ConsumerState<RecommendationsScreen> {
       appBar: AppBar(
         title: Text(l10n.recommendations_title),
       ),
-      body: recommendationsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err')),
-        data: (recs) {
-          if (recs.isEmpty) {
-            final count = ref.watch(completedCountProvider);
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.eco, size: 80, color: HarvestColors.statusGood),
-                  const SizedBox(height: HarvestSpacing.lg),
-                  Text(l10n.recommendations_emptyTitle, style: context.textTheme.headlineMedium),
-                  if (count > 0) ...[
-                    const SizedBox(height: HarvestSpacing.sm),
-                    Text(l10n.recommendations_emptySubtitle(count), style: context.textTheme.bodyLarge),
-                  ]
-                ],
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(
+            child: recommendationsAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => ErrorState(
+                message: 'Failed to load recommendations.',
+                onRetry: () => ref.invalidate(recommendationsProvider),
               ),
-            );
-          }
+              data: (recs) {
+                if (recs.isEmpty) {
+                  final count = ref.watch(completedCountProvider);
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.eco, size: 80, color: HarvestColors.statusGood),
+                        const SizedBox(height: HarvestSpacing.lg),
+                        Text(l10n.recommendations_emptyTitle, style: context.textTheme.headlineMedium),
+                        if (count > 0) ...[
+                          const SizedBox(height: HarvestSpacing.sm),
+                          Text(l10n.recommendations_emptySubtitle(count), style: context.textTheme.bodyLarge),
+                        ]
+                      ],
+                    ),
+                  );
+                }
 
-          // Build stack
-          final stackItems = <Widget>[];
-          // Show up to 3 cards (top + 2 peeked). Reversing so top is last in stack.
-          final displayCount = recs.length > 3 ? 3 : recs.length;
-          for (int i = displayCount - 1; i >= 0; i--) {
-            final rec = recs[i];
-            final isTop = (i == 0);
-            
-            final scale = 1.0 - (i * 0.04);
-            final offset = i * -8.0;
+                // Build stack
+                final stackItems = <Widget>[];
+                // Show up to 3 cards (top + 2 peeked). Reversing so top is last in stack.
+                final displayCount = recs.length > 3 ? 3 : recs.length;
+                for (int i = displayCount - 1; i >= 0; i--) {
+                  final rec = recs[i];
+                  final isTop = (i == 0);
+                  
+                  final scale = 1.0 - (i * 0.04);
+                  final offset = i * -8.0;
 
-            Widget card = Transform.translate(
-              offset: Offset(0, offset),
-              child: Transform.scale(
-                scale: scale,
-                alignment: Alignment.bottomCenter,
-                child: _buildCardContent(rec, profile?.landSizeAcres ?? 0, l10n),
-              ),
-            );
+                  Widget card = Transform.translate(
+                    offset: Offset(0, offset),
+                    child: Transform.scale(
+                      scale: scale,
+                      alignment: Alignment.bottomCenter,
+                      child: _buildCardContent(rec, profile?.landSizeAcres ?? 0, l10n),
+                    ),
+                  );
 
-            if (isTop) {
-              card = RecommendationSwipeCard(
-                recommendation: rec,
-                onSwiped: (dir) => _handleSwipe(rec, dir),
-                onNonGestureTapLeft: () => _handleSwipe(rec, SwipeDirection.left),
-                onNonGestureTapRight: () => _handleSwipe(rec, SwipeDirection.right),
-                child: card,
-              );
-            }
-            
-            stackItems.add(card);
-          }
+                  if (isTop) {
+                    card = RecommendationSwipeCard(
+                      recommendation: rec,
+                      onSwiped: (dir) => _handleSwipe(rec, dir),
+                      onNonGestureTapLeft: () => _handleSwipe(rec, SwipeDirection.left),
+                      onNonGestureTapRight: () => _handleSwipe(rec, SwipeDirection.right),
+                      child: card,
+                    );
+                  }
+                  
+                  stackItems.add(card);
+                }
 
-          return Stack(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: HarvestSpacing.lg),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: stackItems,
-                  ),
-                ),
-              ),
-              if (_showCelebration && _lastCompleted != null)
-                Positioned.fill(
-                  child: CelebrationOverlay(onComplete: _onCelebrationComplete),
-                ),
-            ],
-          );
-        },
+                return Stack(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: HarvestSpacing.lg),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: stackItems,
+                        ),
+                      ),
+                    ),
+                    if (_showCelebration && _lastCompleted != null)
+                      Positioned.fill(
+                        child: CelebrationOverlay(onComplete: _onCelebrationComplete),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

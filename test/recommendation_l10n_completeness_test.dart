@@ -1,26 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harvestpro/core/storage/hive_box_manager.dart';
 import 'package:harvestpro/data/repositories/mock_recommendation_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'test_setup.dart';
+
 void main() {
   setUpAll(() async {
-    FlutterSecureStorage.setMockInitialValues({});
-    TestWidgetsFlutterBinding.ensureInitialized();
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'getApplicationDocumentsDirectory') {
-          return Directory.systemTemp.createTempSync().path;
-        }
-        return null;
-      }
-    );
+    setupTestMocks();
     final tempDir = Directory.systemTemp.createTempSync();
     Hive.init(tempDir.path);
     await HiveBoxManager().initBootstrapBoxes();

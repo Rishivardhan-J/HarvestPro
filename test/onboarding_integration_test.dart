@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harvestpro/core/providers/app_state_provider.dart';
 import 'package:harvestpro/core/router/app_router.dart';
@@ -16,19 +14,11 @@ import 'package:harvestpro/features/onboarding/screens/language_selection_screen
 import 'package:harvestpro/features/onboarding/screens/manual_entry_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'test_setup.dart';
+
 void main() {
   setUpAll(() async {
-    FlutterSecureStorage.setMockInitialValues({});
-    TestWidgetsFlutterBinding.ensureInitialized();
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'getApplicationDocumentsDirectory') {
-          return Directory.systemTemp.createTempSync().path;
-        }
-        return null;
-      }
-    );
+    setupTestMocks();
     final tempDir = Directory.systemTemp.createTempSync();
     Hive.init(tempDir.path);
     await HiveBoxManager().initBootstrapBoxes();

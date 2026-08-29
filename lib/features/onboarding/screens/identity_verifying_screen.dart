@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers/app_state_provider.dart';
+import '../../../core/providers/connectivity_provider.dart';
 import '../../../core/providers/repositories_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 import '../../../core/theme/motion_tokens.dart';
 import '../../../data/models/farmer_profile.dart';
+import '../../../shared_widgets/error_state.dart';
 import 'identity_choice_screen.dart';
 
 class IdentityVerifyingScreen extends ConsumerStatefulWidget {
@@ -36,6 +38,11 @@ class _IdentityVerifyingScreenState extends ConsumerState<IdentityVerifyingScree
       final kisanId = ref.read(enteredKisanIdProvider);
       if (kisanId == null || kisanId.isEmpty) {
         throw Exception('No Kisan ID found to verify');
+      }
+
+      final connectivity = ref.read(connectivityProvider);
+      if (connectivity == AppConnectivityState.offline) {
+        throw Exception('offline');
       }
 
       final repo = ref.read(farmerProfileRepositoryProvider);
@@ -119,34 +126,13 @@ class _IdentityVerifyingScreenState extends ConsumerState<IdentityVerifyingScree
   }
 
   Widget _buildErrorState() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Spacer(),
-        const Icon(Icons.error_outline, size: 48, color: HarvestColors.statusCritical),
-        const SizedBox(height: HarvestSpacing.md),
-        Text(
-          "We couldn't verify that ID. You can try again, or continue without it for now.",
-          textAlign: TextAlign.center,
-          style: context.textTheme.bodyLarge,
-        ),
-        const Spacer(),
-        ElevatedButton(
-          onPressed: _onRetry,
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: HarvestSpacing.md),
-            backgroundColor: HarvestColors.accent,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Retry', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-        ),
-        const SizedBox(height: HarvestSpacing.md),
-        TextButton(
-          onPressed: _onContinueWithoutIt,
-          child: const Text('Continue without it'),
-        ),
-      ],
+    return ErrorState(
+      message: _error == 'Exception: offline' 
+          ? "You're offline. Please check your connection to verify your Kisan ID, or continue without it for now."
+          : "We couldn't verify that ID. You can try again, or continue without it for now.",
+      onRetry: _onRetry,
+      alternativeActionLabel: 'Continue without it',
+      onAlternativeAction: _onContinueWithoutIt,
     );
   }
 

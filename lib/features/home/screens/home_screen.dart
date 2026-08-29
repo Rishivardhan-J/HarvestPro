@@ -11,6 +11,9 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 import '../../../data/models/daily_checkin.dart';
 import '../../../shared_widgets/action_card.dart';
+import '../../../shared_widgets/empty_state.dart';
+import '../../../shared_widgets/error_state.dart';
+import '../../../shared_widgets/offline_banner.dart';
 import '../../../shared_widgets/reason_chip.dart';
 import '../../../shared_widgets/source_badge.dart';
 import '../../../shared_widgets/yield_gauge.dart';
@@ -86,15 +89,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       floatingActionButton: _buildDebugFab(),
       body: SafeArea(
         bottom: false,
-        child: predictionAsync.when(
-          data: (prediction) {
-            if (prediction == null) {
-              return const Center(child: Text('No profile active'));
-            }
-            return _buildContent(context, prediction);
-          },
-          loading: () => _buildSkeleton(context),
-          error: (err, st) => Center(child: Text('Error: $err')),
+        child: Column(
+          children: [
+            const OfflineBanner(),
+            Expanded(
+              child: predictionAsync.when(
+                data: (prediction) {
+                  if (prediction == null) {
+                    return EmptyState(
+                      icon: Icons.camera_alt,
+                      title: 'Welcome to HarvestPro',
+                      description: 'Take your first field photo to get started.',
+                      actionLabel: 'Capture Now',
+                      onAction: () => context.go('/capture'),
+                    );
+                  }
+                  return _buildContent(context, prediction);
+                },
+                loading: () => _buildSkeleton(context),
+                error: (err, st) => ErrorState(
+                  message: 'Failed to load field data.',
+                  onRetry: () => ref.invalidate(homeYieldPredictionProvider),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

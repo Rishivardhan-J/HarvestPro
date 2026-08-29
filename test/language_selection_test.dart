@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harvestpro/core/localization/locale_provider.dart';
 import 'package:harvestpro/core/localization/voice_locale_map.dart';
@@ -13,10 +12,11 @@ import 'package:harvestpro/features/onboarding/screens/language_selection_screen
 import 'package:harvestpro/l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'test_setup.dart';
+
 void main() {
   setUpAll(() async {
-    FlutterSecureStorage.setMockInitialValues({});
-    TestWidgetsFlutterBinding.ensureInitialized();
+    setupTestMocks();
     
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
       const MethodChannel('flutter_tts'),

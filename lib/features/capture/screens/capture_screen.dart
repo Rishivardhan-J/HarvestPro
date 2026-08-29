@@ -15,6 +15,7 @@ import '../../../core/theme/motion_tokens.dart';
 import '../../../data/models/capture_artifact.dart';
 import '../../../data/repositories/capture_repository.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared_widgets/offline_banner.dart';
 import '../../home/providers/home_provider.dart';
 import '../providers/camera_provider.dart';
 import '../utils/image_processor.dart';
@@ -167,17 +168,31 @@ class _CaptureScreenState extends ConsumerState<CaptureScreen> {
     if (_cameraPermissionPermanentlyDenied && _micPermissionPermanentlyDenied) {
       return Scaffold(
         appBar: AppBar(title: const Text('Capture Note')),
-        body: TextNoteFallback(
-          onSubmitted: () => context.go('/home'),
+        body: Column(
+          children: [
+            const OfflineBanner(),
+            Expanded(
+              child: TextNoteFallback(
+                onSubmitted: () => context.go('/home'),
+              ),
+            ),
+          ],
         ),
       );
     }
     
     if (_voiceMode) {
       return Scaffold(
-        body: VoiceNoteOverlay(
-          onCancel: () => setState(() => _voiceMode = false),
-          onSubmitted: () => context.go('/home'),
+        body: Column(
+          children: [
+            const OfflineBanner(),
+            Expanded(
+              child: VoiceNoteOverlay(
+                onCancel: () => setState(() => _voiceMode = false),
+                onSubmitted: () => context.go('/home'),
+              ),
+            ),
+          ],
         ),
       );
     }
@@ -186,88 +201,95 @@ class _CaptureScreenState extends ConsumerState<CaptureScreen> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
+      body: Column(
         children: [
-          // Base layer: Camera Preview or Review Image
-          if (_capturedImagePath != null)
-            Image.network(
-              'file://$_capturedImagePath', // Mock for file loading in preview
-              fit: BoxFit.cover,
-            )
-          else if (cameraController != null && cameraController.value.isInitialized)
-            CameraPreview(cameraController)
-          else if (_cameraPermissionPermanentlyDenied)
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.videocam_off, size: 64, color: Colors.white54),
-                  const SizedBox(height: HarvestSpacing.md),
-                  const Text('Camera Access Denied', style: TextStyle(color: Colors.white)),
-                  TextButton(
-                    onPressed: () => JitPermissionFlow.showSettingsDialog(context, message: l10n.capture_permissionDeniedText),
-                    child: const Text('Open Settings'),
+          const OfflineBanner(),
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                // Base layer: Camera Preview or Review Image
+                if (_capturedImagePath != null)
+                  Image.network(
+                    'file://$_capturedImagePath', // Mock for file loading in preview
+                    fit: BoxFit.cover,
+                  )
+                else if (cameraController != null && cameraController.value.isInitialized)
+                  CameraPreview(cameraController)
+                else if (_cameraPermissionPermanentlyDenied)
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.videocam_off, size: 64, color: Colors.white54),
+                        const SizedBox(height: HarvestSpacing.md),
+                        const Text('Camera Access Denied', style: TextStyle(color: Colors.white)),
+                        TextButton(
+                          onPressed: () => JitPermissionFlow.showSettingsDialog(context, message: l10n.capture_permissionDeniedText),
+                          child: const Text('Open Settings'),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  const Center(child: CircularProgressIndicator(color: Colors.white)),
+                
+                // Flash overlay
+                AnimatedOpacity(
+                  opacity: _flashVisible ? 1.0 : 0.0,
+                  duration: MotionTokens.durationFor(context, MotionTokens.durationMicro),
+                  child: Container(color: Colors.white),
+                ),
+                
+                // Top Instruction Bar
+                if (_capturedImagePath == null)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top + HarvestSpacing.md,
+                        bottom: HarvestSpacing.md,
+                        left: HarvestSpacing.lg,
+                        right: HarvestSpacing.lg,
+                      ),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.black54, Colors.transparent],
+                        ),
+                      ),
+                      child: Text(
+                        l10n.capture_instructionPhoto,
+                        style: context.textTheme.titleMedium?.copyWith(color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                ],
-              ),
-            )
-          else
-            const Center(child: CircularProgressIndicator(color: Colors.white)),
-          
-          // Flash overlay
-          AnimatedOpacity(
-            opacity: _flashVisible ? 1.0 : 0.0,
-            duration: MotionTokens.durationFor(context, MotionTokens.durationMicro),
-            child: Container(color: Colors.white),
-          ),
-          
-          // Top Instruction Bar
-          if (_capturedImagePath == null)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top + HarvestSpacing.md,
-                  bottom: HarvestSpacing.md,
-                  left: HarvestSpacing.lg,
-                  right: HarvestSpacing.lg,
-                ),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.black54, Colors.transparent],
+                
+                // Bottom Controls
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).padding.bottom + HarvestSpacing.xl,
+                      top: HarvestSpacing.xl,
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [Colors.black87, Colors.transparent],
+                      ),
+                    ),
+                    child: _capturedImagePath != null ? _buildReviewControls(l10n) : _buildLiveControls(cameraController),
                   ),
                 ),
-                child: Text(
-                  l10n.capture_instructionPhoto,
-                  style: context.textTheme.titleMedium?.copyWith(color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          
-          // Bottom Controls
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).padding.bottom + HarvestSpacing.xl,
-                top: HarvestSpacing.xl,
-              ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [Colors.black87, Colors.transparent],
-                ),
-              ),
-              child: _capturedImagePath != null ? _buildReviewControls(l10n) : _buildLiveControls(cameraController),
+              ],
             ),
           ),
         ],
