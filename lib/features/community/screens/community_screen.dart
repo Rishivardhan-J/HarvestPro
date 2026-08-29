@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers/app_state_provider.dart';
 import '../../../core/providers/repositories_provider.dart';
+import '../../../core/services/sms_ivr_services.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 import '../../../data/models/post.dart';
@@ -43,7 +44,8 @@ class CommunityScreen extends ConsumerWidget {
     );
   }
 
-  void _handleHelplineCall(BuildContext context, AppLocalizations l10n) {
+  void _handleHelplineCall(BuildContext context, WidgetRef ref, AppLocalizations l10n) {
+    ref.read(ivrProvider).initiateCall('1800-KRISHI');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(l10n.community_helplineMock),
@@ -110,7 +112,7 @@ class CommunityScreen extends ConsumerWidget {
                             ElevatedButton.icon(
                               icon: const Icon(Icons.support_agent),
                               label: Text(l10n.community_helplineExpert),
-                              onPressed: () => _handleHelplineCall(context, l10n),
+                              onPressed: () => _handleHelplineCall(context, ref, l10n),
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size.fromHeight(48),
                               ),
@@ -119,7 +121,7 @@ class CommunityScreen extends ConsumerWidget {
                             OutlinedButton.icon(
                               icon: const Icon(Icons.phone),
                               label: Text(l10n.community_helplinePerson),
-                              onPressed: () => _handleHelplineCall(context, l10n),
+                              onPressed: () => _handleHelplineCall(context, ref, l10n),
                               style: OutlinedButton.styleFrom(
                                 minimumSize: const Size.fromHeight(48),
                               ),

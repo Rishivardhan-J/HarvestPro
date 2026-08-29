@@ -9,6 +9,8 @@ import 'package:uuid/uuid.dart';
 
 import '../../../core/permissions/jit_permission_flow.dart';
 import '../../../core/providers/app_state_provider.dart';
+import '../../../core/providers/data_saver_provider.dart';
+import '../../../core/providers/repositories_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 import '../../../core/theme/motion_tokens.dart';
@@ -129,7 +131,11 @@ class _CaptureScreenState extends ConsumerState<CaptureScreen> {
     }
     setState(() => _isProcessing = true);
     try {
-      final processedPath = await ImageProcessor.processAndSaveImage(_capturedImagePath!);
+      final dataSaverEnabled = ref.read(dataSaverEnabledProvider);
+      final processedPath = await ImageProcessor.processAndSaveImage(
+        _capturedImagePath!,
+        dataSaverEnabled: dataSaverEnabled,
+      );
       
       final profile = ref.read(activeFarmerProfileProvider).valueOrNull;
       if (profile != null) {

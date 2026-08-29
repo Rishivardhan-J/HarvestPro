@@ -135,6 +135,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const SettingsScreen()),
         routes: [
           GoRoute(
+            path: 'language',
+            pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const LanguageSelectionScreen(isFromSettings: true)),
+          ),
+          GoRoute(
             path: 'profiles',
             pageBuilder: (context, state) => sharedAxisVerticalPage(context, state, const ProfilesScreen()),
           ),

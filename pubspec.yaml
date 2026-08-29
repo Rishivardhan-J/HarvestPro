@@ -58,6 +58,10 @@ dependencies:
   json_annotation: ^4.8.1
   animations: any
   uuid: ^4.4.0
+  firebase_core: ^4.14.0
+  firebase_messaging: ^16.6.0
+  flutter_local_notifications: ^22.3.0
+  package_info_plus: ^9.0.1
 
 dev_dependencies:
   flutter_test:

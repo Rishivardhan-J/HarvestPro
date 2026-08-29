@@ -17,7 +17,7 @@ class ImageProcessor {
   /// 4. Iteratively JPEG compresses down to <300KB (step down to quality 40).
   /// 5. Encrypts the final bytes with AES and saves to a secure local file.
   /// Returns the path to the saved file.
-  static Future<String> processAndSaveImage(String sourcePath) async {
+  static Future<String> processAndSaveImage(String sourcePath, {bool dataSaverEnabled = false}) async {
     final bytes = await File(sourcePath).readAsBytes();
     
     // 1. Decode image and apply orientation
@@ -33,25 +33,27 @@ class ImageProcessor {
     // The newly encoded JPEG will not have the original EXIF unless we pass it.
 
     // 3 & 4. Iterative compression
-    // Max long edge 1280
-    if (image.width > 1280 || image.height > 1280) {
+    // Max long edge 1280 (or 800 if data saver is enabled)
+    final maxLongEdge = dataSaverEnabled ? 800 : 1280;
+    if (image.width > maxLongEdge || image.height > maxLongEdge) {
       final isLandscape = image.width > image.height;
-      final targetWidth = isLandscape ? 1280 : null;
-      final targetHeight = isLandscape ? null : 1280;
+      final targetWidth = isLandscape ? maxLongEdge : null;
+      final targetHeight = isLandscape ? null : maxLongEdge;
       image = img.copyResize(image, width: targetWidth, height: targetHeight);
     }
 
-    int quality = 85;
+    int quality = dataSaverEnabled ? 60 : 85;
     Uint8List finalBytes = img.encodeJpg(image, quality: quality);
     
-    // Budget is 300KB = 300 * 1024 bytes = 307200
-    while (finalBytes.length > 300 * 1024 && quality > 40) {
+    // Budget is 300KB (or 100KB for data saver)
+    final sizeBudget = dataSaverEnabled ? 100 * 1024 : 300 * 1024;
+    while (finalBytes.length > sizeBudget && quality > 40) {
       quality -= 10;
       finalBytes = img.encodeJpg(image, quality: quality);
     }
     
     // If it's still too big at quality 40, resize further
-    while (finalBytes.length > 300 * 1024) {
+    while (finalBytes.length > sizeBudget) {
       image = img.copyResize(image!, width: (image.width * 0.8).toInt());
       finalBytes = img.encodeJpg(image, quality: 40);
     }

@@ -11,7 +11,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/design_tokens.dart';
 
 class LanguageSelectionScreen extends ConsumerStatefulWidget {
-  const LanguageSelectionScreen({super.key});
+  final bool isFromSettings;
+  const LanguageSelectionScreen({super.key, this.isFromSettings = false});
 
   @override
   ConsumerState<LanguageSelectionScreen> createState() => _LanguageSelectionScreenState();
@@ -102,7 +103,14 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
         // 1. Persist to Hive (await it to avoid redirect race)
         await ref.read(localeProvider.notifier).persistLocale();
         
-        // 2. Advance state machine
+        if (widget.isFromSettings) {
+          if (mounted) {
+            context.pop();
+          }
+          return;
+        }
+
+        // 2. Advance state machine only if not from settings
         await ref.read(onboardingStateProvider.notifier).advanceToIdentityChoice();
         
         // 3. Navigate securely

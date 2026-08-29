@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/farmer_profile.dart';
 import '../../data/repositories/farmer_profile_repository.dart';
@@ -73,6 +74,11 @@ class OnboardingStateNotifier extends StateNotifier<OnboardingStep?> {
     }
     await _persistAndSet(OnboardingStep.complete);
   }
+
+  Future<void> resetOnboarding() async {
+    await HiveBoxManager().putSetting('onboardingStep', null);
+    state = null; // Will trigger router to go back to splash/language
+  }
 }
 
 final onboardingStateProvider = StateNotifierProvider<OnboardingStateNotifier, OnboardingStep?>((ref) {
@@ -122,4 +128,29 @@ class ActiveFarmerProfileNotifier extends StateNotifier<AsyncValue<FarmerProfile
 final activeFarmerProfileProvider = StateNotifierProvider<ActiveFarmerProfileNotifier, AsyncValue<FarmerProfile?>>((ref) {
   final repo = ref.watch(farmerProfileRepositoryProvider);
   return ActiveFarmerProfileNotifier(repo);
+});
+
+class NotificationTimeNotifier extends StateNotifier<TimeOfDay> {
+  NotificationTimeNotifier() : super(const TimeOfDay(hour: 6, minute: 0)) {
+    _init();
+  }
+
+  Future<void> _init() async {
+    final hour = await HiveBoxManager().getSetting('notificationTimeHour');
+    final minute = await HiveBoxManager().getSetting('notificationTimeMinute');
+    
+    if (hour != null && minute != null) {
+      state = TimeOfDay(hour: hour as int, minute: minute as int);
+    }
+  }
+
+  Future<void> setTime(TimeOfDay time) async {
+    await HiveBoxManager().putSetting('notificationTimeHour', time.hour);
+    await HiveBoxManager().putSetting('notificationTimeMinute', time.minute);
+    state = time;
+  }
+}
+
+final notificationTimeProvider = StateNotifierProvider<NotificationTimeNotifier, TimeOfDay>((ref) {
+  return NotificationTimeNotifier();
 });
