@@ -137,6 +137,7 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
                   prefixIcon: const Icon(Icons.person),
                   suffixIcon: IconButton(
                     icon: Icon(_isListeningName ? Icons.mic : Icons.mic_none, color: _isListeningName ? HarvestColors.accent : null),
+                    tooltip: 'Dictate name',
                     onPressed: () => _listen(_nameController, true),
                   ),
                   border: const OutlineInputBorder(),
@@ -152,6 +153,7 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
                   prefixIcon: const Icon(Icons.location_on),
                   suffixIcon: IconButton(
                     icon: Icon(_isListeningVillage ? Icons.mic : Icons.mic_none, color: _isListeningVillage ? HarvestColors.accent : null),
+                    tooltip: 'Dictate village',
                     onPressed: () => _listen(_villageController, false),
                   ),
                   border: const OutlineInputBorder(),

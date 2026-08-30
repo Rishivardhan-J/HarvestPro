@@ -191,6 +191,7 @@ class _VoiceNoteOverlayState extends ConsumerState<VoiceNoteOverlay> {
             IconButton(
               icon: const Icon(Icons.play_circle_fill, size: 48),
               color: HarvestColors.accent,
+              tooltip: 'Play voice note',
               onPressed: _playReview,
             ),
             const SizedBox(height: HarvestSpacing.xxl),

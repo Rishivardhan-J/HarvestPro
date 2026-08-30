@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../core/providers/connectivity_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/design_tokens.dart';
@@ -11,6 +13,17 @@ class OfflineBanner extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final connectivityState = ref.watch(connectivityProvider);
+    
+    ref.listen<AppConnectivityState>(connectivityProvider, (previous, next) {
+      if (previous != null && previous != next) {
+        if (next == AppConnectivityState.offline) {
+          SemanticsService.sendAnnouncement(View.of(context), 'You are currently offline', Directionality.of(context));
+        } else if (next == AppConnectivityState.online) {
+          SemanticsService.sendAnnouncement(View.of(context), 'You are back online', Directionality.of(context));
+        }
+      }
+    });
+
     final isOffline = connectivityState == AppConnectivityState.offline;
 
     return AnimatedSize(

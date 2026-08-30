@@ -349,6 +349,7 @@ class _CaptureScreenState extends ConsumerState<CaptureScreen> {
             right: 0,
             child: IconButton(
               icon: const Icon(Icons.mic, color: Colors.white, size: 32),
+              tooltip: 'Switch to voice note',
               onPressed: () => setState(() => _voiceMode = true),
             ),
           ),

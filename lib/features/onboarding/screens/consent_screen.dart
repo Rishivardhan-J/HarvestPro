@@ -102,13 +102,18 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
               ),
               const SizedBox(height: HarvestSpacing.xs),
               
-              GestureDetector(
-                onTap: () {
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+                  minimumSize: const Size(48, 48),
+                ),
+                onPressed: () {
                   setState(() {
                     _showLearnMore = !_showLearnMore;
                   });
                 },
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Text(
                       'Learn more',

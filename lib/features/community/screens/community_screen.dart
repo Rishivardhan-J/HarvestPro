@@ -9,6 +9,7 @@ import '../../../data/models/post.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared_widgets/error_state.dart';
 import '../../../shared_widgets/offline_banner.dart';
+import '../../../shared_widgets/status_badge.dart';
 import '../widgets/streak_visual.dart';
 
 final communityFeedProvider = FutureProvider.autoDispose<List<Post>>((ref) async {
@@ -167,9 +168,12 @@ class CommunityScreen extends ConsumerWidget {
                     children: [
                       Text(post.authorDisplayName, style: context.textTheme.titleMedium),
                       if (isHelpful)
-                        Text(
-                          l10n.community_helpfulBadge(12),
-                          style: context.textTheme.bodySmall?.copyWith(color: HarvestColors.statusGood),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: StatusBadge(
+                            status: const StatusGood(),
+                            label: l10n.community_helpfulBadge(12),
+                          ),
                         ),
                     ],
                   ),

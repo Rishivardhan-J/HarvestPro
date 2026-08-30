@@ -6,6 +6,7 @@ import 'core/localization/locale_provider.dart';
 import 'core/router/app_router.dart';
 import 'core/storage/hive_box_manager.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/global_sync_listener.dart';
 
 Future<void> initHive() async {
   await HiveBoxManager().initBootstrapBoxes();
@@ -39,6 +40,11 @@ class HarvestProApp extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: ref.watch(appRouterProvider),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return GlobalSyncListener(
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

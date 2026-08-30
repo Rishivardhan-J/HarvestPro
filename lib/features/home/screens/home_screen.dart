@@ -204,6 +204,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.volume_up, size: 20),
               color: context.theme.primaryColor,
+              tooltip: 'Play narration',
               onPressed: () {
                 if (summary.isNotEmpty) {
                   _playNarration(summary);

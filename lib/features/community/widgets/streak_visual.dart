@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers/app_state_provider.dart';
 import '../../../core/providers/repositories_provider.dart';
@@ -69,6 +70,14 @@ class StreakVisual extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final streakAsync = ref.watch(streakProvider);
     final l10n = AppLocalizations.of(context)!;
+    
+    ref.listen<AsyncValue<int>>(streakProvider, (previous, next) {
+      if (next.hasValue && next.value != null && next.value! > 0) {
+        if (previous?.value != next.value) {
+          SemanticsService.sendAnnouncement(View.of(context), l10n.community_streakTitle(next.value!), Directionality.of(context));
+        }
+      }
+    });
 
     return streakAsync.when(
       loading: () => const SizedBox.shrink(),

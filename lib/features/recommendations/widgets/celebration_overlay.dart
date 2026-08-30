@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
+
 import '../../../core/theme/design_tokens.dart';
+import '../../../l10n/app_localizations.dart';
 
 class CelebrationOverlay extends StatefulWidget {
   final VoidCallback onComplete;
@@ -20,6 +23,13 @@ class _CelebrationOverlayState extends State<CelebrationOverlay> with SingleTick
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 600));
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
+        SemanticsService.sendAnnouncement(View.of(context), l10n.recommendations_done, Directionality.of(context));
+      }
+    });
     
     // Initialize particles
     for (int i = 0; i < 20; i++) {

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+
+import '../../core/localization/locale_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/design_tokens.dart';
+import '../../features/home/providers/home_provider.dart';
 
-class EmptyState extends StatelessWidget {
+class EmptyState extends ConsumerStatefulWidget {
   final IconData icon;
   final String title;
   final String description;
@@ -19,6 +24,46 @@ class EmptyState extends StatelessWidget {
   });
 
   @override
+  ConsumerState<EmptyState> createState() => _EmptyStateState();
+}
+
+class _EmptyStateState extends ConsumerState<EmptyState> {
+  final FlutterTts _tts = FlutterTts();
+  bool _hasNarrated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _playNarration();
+      }
+    });
+  }
+
+  Future<void> _playNarration() async {
+    if (_hasNarrated) {
+      return;
+    }
+    
+    final voiceEnabled = ref.read(voiceNarrationEnabledProvider);
+    if (!voiceEnabled) {
+      return;
+    }
+
+    final locale = ref.read(localeProvider).languageCode;
+    await _tts.setLanguage(locale == 'ta' ? 'ta-IN' : 'en-US');
+    await _tts.speak('${widget.title}. ${widget.description}');
+    _hasNarrated = true;
+  }
+
+  @override
+  void dispose() {
+    _tts.stop();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
@@ -26,28 +71,28 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 64, color: context.theme.disabledColor),
+            Icon(widget.icon, size: 64, color: context.theme.disabledColor),
             const SizedBox(height: HarvestSpacing.lg),
             Text(
-              title,
+              widget.title,
               style: context.textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: HarvestSpacing.sm),
             Text(
-              description,
+              widget.description,
               style: context.textTheme.bodyLarge?.copyWith(color: context.theme.hintColor),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: HarvestSpacing.xl),
             ElevatedButton(
-              onPressed: onAction,
+              onPressed: widget.onAction,
               style: ElevatedButton.styleFrom(
                 backgroundColor: HarvestColors.accent,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: HarvestSpacing.md, horizontal: HarvestSpacing.xl),
               ),
-              child: Text(actionLabel, style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+              child: Text(widget.actionLabel, style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -55,3 +100,4 @@ class EmptyState extends StatelessWidget {
     );
   }
 }
+

@@ -107,6 +107,12 @@ class _RecommendationSwipeCardState extends State<RecommendationSwipeCard> with 
   }
   
   Future<void> _animateTo(Offset target, {required Duration duration, required Curve curve}) async {
+    final disableAnimations = MediaQuery.of(context).disableAnimations;
+    if (disableAnimations) {
+      setState(() => _dragOffset = target);
+      return;
+    }
+    
     final startOffset = _dragOffset;
     _controller.duration = duration;
     
@@ -214,6 +220,7 @@ class _RecommendationSwipeCardState extends State<RecommendationSwipeCard> with 
                   onPressed: widget.onNonGestureTapLeft,
                   backgroundColor: Colors.grey,
                   foregroundColor: Colors.white,
+                  tooltip: l10n.recommendations_remindLater,
                   child: const Icon(Icons.schedule),
                 ),
                 FloatingActionButton.small(
@@ -221,6 +228,7 @@ class _RecommendationSwipeCardState extends State<RecommendationSwipeCard> with 
                   onPressed: widget.onNonGestureTapRight,
                   backgroundColor: HarvestColors.statusGood,
                   foregroundColor: Colors.white,
+                  tooltip: l10n.recommendations_done,
                   child: const Icon(Icons.check),
                 ),
               ],
